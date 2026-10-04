@@ -1,0 +1,131 @@
+---
+// src/layouts/BaseLayout.astro
+import '../styles/global.css';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import MobileStickyBar from '../components/common/MobileStickyBar.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+}
+
+const {
+  title = 'Emberly Health | Medical Billing, Coding & End-to-End RCM Services',
+  description = 'Emberly Health accelerates cash flow and eliminates preventable denials for US medical practices, specialized clinics, and billing groups through certified coding and full-cycle RCM.',
+  canonical,
+  ogImage = '/og-image.png',
+  ogType = 'website',
+} = Astro.props;
+
+const siteUrl = 'https://emberlyhealth.pages.dev';
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+// Structured data for Google Rich Results (Organization & ProfessionalService)
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  'name': 'Emberly Health',
+  'alternateName': 'Emberly Health RCM',
+  'url': siteUrl,
+  'logo': `${siteUrl}/favicon.svg`,
+  'image': fullOgImage,
+  'description': description,
+  'telephone': '+1-214-555-0147',
+  'email': 'hello@emberlyhealth.com',
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': '2400 Meridian Park Drive, Suite 310',
+    'addressLocality': 'Plano',
+    'addressRegion': 'TX',
+    'postalCode': '75024',
+    'addressCountry': 'US'
+  },
+  'openingHoursSpecification': {
+    '@type': 'OpeningHoursSpecification',
+    'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    'opens': '08:00',
+    'closes': '18:00'
+  },
+  'priceRange': '$$',
+  'areaServed': 'United States',
+  'hasOfferCatalog': {
+    '@type': 'OfferCatalog',
+    'name': 'Healthcare Revenue Cycle Management Services',
+    'itemListElement': [
+      { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Medical Billing' } },
+      { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Medical Coding' } },
+      { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'End-to-End RCM' } },
+      { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Denial Management and Appeals' } },
+      { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'A/R Follow-up' } },
+      { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Eligibility Verification and Prior Authorization' } },
+      { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Provider Credentialing' } },
+      { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Patient Billing and Payment Posting' } }
+    ]
+  }
+};
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImage} />
+    <meta property="og:site_name" content="Emberly Health" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={fullOgImage} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+    <!-- Cloudflare Web Analytics (Free, cookieless - uncomment and insert token for production) -->
+    <!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_CLOUDFLARE_ANALYTICS_TOKEN"}'></script> -->
+  </head>
+  <body class="bg-emberly-warm-white text-emberly-charcoal min-h-screen flex flex-col antialiased selection:bg-emberly-orange selection:text-white">
+    <!-- Skip to Content Accessibility Anchor -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] px-4 py-2 bg-emberly-orange text-white font-bold rounded-lg shadow-lg"
+    >
+      Skip to content
+    </a>
+
+    <!-- Floating Top Pill Navigation -->
+    <Header />
+
+    <!-- Main Content Slot -->
+    <main id="main-content" class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Site Footer -->
+    <Footer />
+
+    <!-- Sticky Mobile CTA Bar -->
+    <MobileStickyBar />
+  </body>
+</html>

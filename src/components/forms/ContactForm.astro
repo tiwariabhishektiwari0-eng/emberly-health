@@ -1,0 +1,401 @@
+---
+// src/components/forms/ContactForm.astro
+// Progressive enhancement contact form with Turnstile verification and Resend backend
+import Icon from '../common/Icon.astro';
+
+// Optional public site key for Cloudflare Turnstile (can be set in Cloudflare or defaults to Cloudflare demo key for local testing)
+const turnstileSiteKey = '0x4AAAAAAABxxPlaceholderSiteKey';
+---
+
+<div class="bg-white border border-emberly-light-gray rounded-3xl p-6 sm:p-10 shadow-card">
+  <!-- Form Header -->
+  <div class="mb-8">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-2">
+      <Icon name="sparkles" class="w-3.5 h-3.5" />
+      <span>Confidential Practice Review</span>
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading tracking-tight">
+      Request a Free Revenue Assessment
+    </h2>
+    <p class="mt-2 text-xs sm:text-sm text-emberly-mid-gray">
+      Fill out your practice parameters below. Our client success team will review your specialty requirements and prepare custom benchmark comparisons within 1 business day.
+    </p>
+
+    <!-- MANDATORY PHI NOTICE -->
+    <div class="mt-4 p-3.5 rounded-xl bg-emberly-orange-tint/60 border border-emberly-orange/30 flex items-start gap-3 text-xs text-emberly-charcoal">
+      <Icon name="alert-circle" class="w-4 h-4 text-emberly-orange flex-shrink-0 mt-0.5" />
+      <p class="leading-relaxed">
+        <strong>HIPAA Privacy Notice:</strong> Do not include patient names, dates of birth, Social Security numbers, or any Protected Health Information (PHI) in this form.
+      </p>
+    </div>
+  </div>
+
+  <!-- Form Success Screen (Initially hidden) -->
+  <div id="contact-success-state" class="hidden py-8 text-center">
+    <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mx-auto mb-4">
+      <Icon name="check-circle" class="w-8 h-8" />
+    </div>
+    <h3 class="text-xl font-bold text-emberly-charcoal mb-2 font-heading">
+      Assessment Request Received
+    </h3>
+    <p class="text-xs sm:text-sm text-emberly-mid-gray max-w-md mx-auto mb-6 leading-relaxed">
+      Thank you for contacting Emberly Health. Daniela Reyes or a senior practice director will review your specialty details and reach out within 1 business day.
+    </p>
+    <div class="p-4 rounded-xl bg-emberly-warm-white border border-emberly-light-gray max-w-md mx-auto text-xs text-emberly-charcoal text-left">
+      <p class="font-semibold mb-1">Next Steps:</p>
+      <ul class="list-disc pl-4 space-y-1 text-emberly-mid-gray">
+        <li>Introductory 15-minute phone alignment with our clinical pod.</li>
+        <li>Review of high-level clearinghouse denial patterns.</li>
+        <li>Custom proposal with performance-aligned fee options.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Form Error Alert Container (Initially hidden) -->
+  <div id="contact-error-banner" class="hidden mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-800">
+    <div class="flex items-start gap-2.5">
+      <Icon name="alert-circle" class="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
+      <div class="flex-1">
+        <p id="contact-error-text" class="font-medium mb-2">There was an issue submitting your request.</p>
+        <div id="contact-fallback-container" class="hidden pt-2 border-t border-rose-200/60">
+          <a
+            id="contact-fallback-link"
+            href="mailto:hello@emberlyhealth.com"
+            class="font-bold underline text-rose-900 hover:text-emberly-orange"
+          >
+            Click here to email us directly via your default email client &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Assessment Request Form -->
+  <form id="assessment-contact-form" class="space-y-5" novalidate>
+    <!-- Hidden Honeypot Field for anti-bot filtering -->
+    <div class="hidden" aria-hidden="true">
+      <label for="website_honeypot">Website (leave blank)</label>
+      <input type="text" id="website_honeypot" name="website_honeypot" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <!-- Row 1: Full Name & Work Email -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="fullName" class="block text-xs font-bold text-emberly-charcoal mb-1.5">
+          Full Name <span class="text-emberly-orange">*</span>
+        </label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          required
+          placeholder="e.g. Dr. Jennifer Vance"
+          class="w-full px-4 py-2.5 rounded-xl border border-emberly-light-gray bg-white text-xs sm:text-sm text-emberly-charcoal placeholder:text-emberly-mid-gray/50 focus:outline-none focus:border-emberly-orange focus:ring-1 focus:ring-emberly-orange transition-colors"
+        />
+        <span class="field-error-msg hidden text-[11px] text-rose-600 mt-1 block">Please enter your full name.</span>
+      </div>
+
+      <div>
+        <label for="workEmail" class="block text-xs font-bold text-emberly-charcoal mb-1.5">
+          Work Email <span class="text-emberly-orange">*</span>
+        </label>
+        <input
+          type="email"
+          id="workEmail"
+          name="workEmail"
+          required
+          placeholder="e.g. jvance@planoortho.com"
+          class="w-full px-4 py-2.5 rounded-xl border border-emberly-light-gray bg-white text-xs sm:text-sm text-emberly-charcoal placeholder:text-emberly-mid-gray/50 focus:outline-none focus:border-emberly-orange focus:ring-1 focus:ring-emberly-orange transition-colors"
+        />
+        <span class="field-error-msg hidden text-[11px] text-rose-600 mt-1 block">Please enter a valid business email.</span>
+      </div>
+    </div>
+
+    <!-- Row 2: Practice Name & Phone -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="practiceName" class="block text-xs font-bold text-emberly-charcoal mb-1.5">
+          Practice or Clinic Name <span class="text-emberly-orange">*</span>
+        </label>
+        <input
+          type="text"
+          id="practiceName"
+          name="practiceName"
+          required
+          placeholder="e.g. Vance Orthopedic Associates"
+          class="w-full px-4 py-2.5 rounded-xl border border-emberly-light-gray bg-white text-xs sm:text-sm text-emberly-charcoal placeholder:text-emberly-mid-gray/50 focus:outline-none focus:border-emberly-orange focus:ring-1 focus:ring-emberly-orange transition-colors"
+        />
+        <span class="field-error-msg hidden text-[11px] text-rose-600 mt-1 block">Please enter your practice name.</span>
+      </div>
+
+      <div>
+        <label for="phone" class="block text-xs font-bold text-emberly-charcoal mb-1.5">
+          Direct Phone <span class="text-emberly-mid-gray font-normal">(Optional)</span>
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="e.g. (214) 555-0199"
+          class="w-full px-4 py-2.5 rounded-xl border border-emberly-light-gray bg-white text-xs sm:text-sm text-emberly-charcoal placeholder:text-emberly-mid-gray/50 focus:outline-none focus:border-emberly-orange focus:ring-1 focus:ring-emberly-orange transition-colors"
+        />
+      </div>
+    </div>
+
+    <!-- Row 3: Specialty & Monthly Claim Volume -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="specialty" class="block text-xs font-bold text-emberly-charcoal mb-1.5">
+          Medical Specialty <span class="text-emberly-orange">*</span>
+        </label>
+        <select
+          id="specialty"
+          name="specialty"
+          required
+          class="w-full px-4 py-2.5 rounded-xl border border-emberly-light-gray bg-white text-xs sm:text-sm text-emberly-charcoal focus:outline-none focus:border-emberly-orange focus:ring-1 focus:ring-emberly-orange transition-colors"
+        >
+          <option value="" disabled selected>Select clinical specialty...</option>
+          <option value="Primary Care">Primary Care / Internal Medicine</option>
+          <option value="Cardiology">Cardiology</option>
+          <option value="Orthopedics">Orthopedics & Spine</option>
+          <option value="Dermatology">Dermatology</option>
+          <option value="Behavioral Health">Behavioral & Mental Health</option>
+          <option value="Urgent Care">Urgent Care Center</option>
+          <option value="Radiology">Radiology & Imaging</option>
+          <option value="Physical Therapy">Physical & Occupational Therapy</option>
+          <option value="Multi-Specialty Group">Multi-Specialty Practice</option>
+          <option value="Other Specialty">Other Medical Specialty</option>
+        </select>
+        <span class="field-error-msg hidden text-[11px] text-rose-600 mt-1 block">Please select your primary specialty.</span>
+      </div>
+
+      <div>
+        <label for="claimVolume" class="block text-xs font-bold text-emberly-charcoal mb-1.5">
+          Estimated Monthly Claim Volume <span class="text-emberly-orange">*</span>
+        </label>
+        <select
+          id="claimVolume"
+          name="claimVolume"
+          required
+          class="w-full px-4 py-2.5 rounded-xl border border-emberly-light-gray bg-white text-xs sm:text-sm text-emberly-charcoal focus:outline-none focus:border-emberly-orange focus:ring-1 focus:ring-emberly-orange transition-colors"
+        >
+          <option value="" disabled selected>Select monthly claim volume...</option>
+          <option value="Under 500 claims/month">Under 500 claims / month (Solo practice)</option>
+          <option value="500 - 1,500 claims/month">500 &ndash; 1,500 claims / month (2&ndash;4 providers)</option>
+          <option value="1,500 - 5,000 claims/month">1,500 &ndash; 5,000 claims / month (Medium clinic)</option>
+          <option value="5,000+ claims/month">5,000+ claims / month (Large group / Multi-site)</option>
+        </select>
+        <span class="field-error-msg hidden text-[11px] text-rose-600 mt-1 block">Please select your approximate volume.</span>
+      </div>
+    </div>
+
+    <!-- Message / Notes -->
+    <div>
+      <label for="message" class="block text-xs font-bold text-emberly-charcoal mb-1.5">
+        Current Billing Challenges or EHR System <span class="text-emberly-mid-gray font-normal">(Optional)</span>
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        rows="3"
+        placeholder="e.g. We use AthenaHealth and have an accumulation of aged commercial denials over 90 days..."
+        class="w-full px-4 py-2.5 rounded-xl border border-emberly-light-gray bg-white text-xs sm:text-sm text-emberly-charcoal placeholder:text-emberly-mid-gray/50 focus:outline-none focus:border-emberly-orange focus:ring-1 focus:ring-emberly-orange transition-colors"
+      ></textarea>
+    </div>
+
+    <!-- Cloudflare Turnstile Container (Free CAPTCHA alternative) -->
+    <div class="pt-2">
+      <div
+        id="turnstile-widget"
+        class="cf-turnstile"
+        data-sitekey={turnstileSiteKey}
+        data-theme="light"
+        data-size="flexible"
+      ></div>
+      <input type="hidden" id="turnstileToken" name="turnstileToken" value="" />
+    </div>
+
+    <!-- Submit Button with Loading State -->
+    <div class="pt-2">
+      <button
+        type="submit"
+        id="submit-assessment-btn"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-emberly-orange text-white font-bold text-sm sm:text-base hover:bg-emberly-orange-hover shadow-card subtle-lift transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emberly-orange focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        <span id="btn-text">Submit Assessment Request</span>
+        <span id="btn-spinner" class="hidden w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+        <Icon name="arrow-right" class="w-4 h-4" id="btn-arrow" />
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Cloudflare Turnstile Script -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad" async defer></script>
+
+<script>
+  // Turnstile Callback Registration
+  declare global {
+    interface Window {
+      onTurnstileLoad?: () => void;
+      turnstile?: {
+        render: (container: string | HTMLElement, options: Record<string, unknown>) => string;
+        reset: (widgetId?: string) => void;
+      };
+    }
+  }
+
+  let turnstileWidgetId = '';
+  window.onTurnstileLoad = function() {
+    if (window.turnstile) {
+      turnstileWidgetId = window.turnstile.render('#turnstile-widget', {
+        sitekey: '1x00000000000000000000AA', // Cloudflare generic pass key for testing
+        callback: function(token: string) {
+          const input = document.getElementById('turnstileToken') as HTMLInputElement;
+          if (input) input.value = token;
+        }
+      });
+    }
+  };
+
+  // Client-side Progressive Form Handling
+  const form = document.getElementById('assessment-contact-form') as HTMLFormElement;
+  const successState = document.getElementById('contact-success-state');
+  const errorBanner = document.getElementById('contact-error-banner');
+  const errorText = document.getElementById('contact-error-text');
+  const fallbackContainer = document.getElementById('contact-fallback-container');
+  const fallbackLink = document.getElementById('contact-fallback-link') as HTMLAnchorElement;
+  const submitBtn = document.getElementById('submit-assessment-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text');
+  const btnSpinner = document.getElementById('btn-spinner');
+  const btnArrow = document.getElementById('btn-arrow');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorBanner?.classList.add('hidden');
+    fallbackContainer?.classList.add('hidden');
+
+    // Basic validation
+    const fullName = (document.getElementById('fullName') as HTMLInputElement)?.value.trim();
+    const workEmail = (document.getElementById('workEmail') as HTMLInputElement)?.value.trim();
+    const practiceName = (document.getElementById('practiceName') as HTMLInputElement)?.value.trim();
+    const specialty = (document.getElementById('specialty') as HTMLSelectElement)?.value;
+    const claimVolume = (document.getElementById('claimVolume') as HTMLSelectElement)?.value;
+    const phone = (document.getElementById('phone') as HTMLInputElement)?.value.trim();
+    const message = (document.getElementById('message') as HTMLTextAreaElement)?.value.trim();
+    const honeypot = (document.getElementById('website_honeypot') as HTMLInputElement)?.value;
+    const turnstileToken = (document.getElementById('turnstileToken') as HTMLInputElement)?.value;
+
+    let hasError = false;
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!fullName) {
+      toggleFieldError('fullName', true);
+      hasError = true;
+    } else {
+      toggleFieldError('fullName', false);
+    }
+
+    if (!workEmail || !emailRegex.test(workEmail)) {
+      toggleFieldError('workEmail', true);
+      hasError = true;
+    } else {
+      toggleFieldError('workEmail', false);
+    }
+
+    if (!practiceName) {
+      toggleFieldError('practiceName', true);
+      hasError = true;
+    } else {
+      toggleFieldError('practiceName', false);
+    }
+
+    if (!specialty) {
+      toggleFieldError('specialty', true);
+      hasError = true;
+    } else {
+      toggleFieldError('specialty', false);
+    }
+
+    if (!claimVolume) {
+      toggleFieldError('claimVolume', true);
+      hasError = true;
+    } else {
+      toggleFieldError('claimVolume', false);
+    }
+
+    if (hasError) return;
+
+    // Set Loading UI state
+    submitBtn.disabled = true;
+    btnText!.textContent = 'Submitting Assessment...';
+    btnSpinner?.classList.remove('hidden');
+    btnArrow?.classList.add('hidden');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName,
+          workEmail,
+          practiceName,
+          phone,
+          specialty,
+          claimVolume,
+          message,
+          website_honeypot: honeypot,
+          turnstileToken
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Success
+        form.classList.add('hidden');
+        successState?.classList.remove('hidden');
+        form.reset();
+      } else {
+        // Error from function
+        showFormError(result.error || 'Submission failed. Please check your entries.', result.fallbackMailto);
+      }
+    } catch (err) {
+      // Network or offline failure
+      const mailtoUrl = `mailto:hello@emberlyhealth.com?subject=${encodeURIComponent('Assessment Request: ' + practiceName)}&body=${encodeURIComponent('Name: ' + fullName + '\nPractice: ' + practiceName + '\nSpecialty: ' + specialty + '\nMonthly Claims: ' + claimVolume + '\nPhone: ' + phone + '\nNotes: ' + message)}`;
+      showFormError('Network connection issue. Please use our direct email link below.', mailtoUrl);
+    } finally {
+      submitBtn.disabled = false;
+      btnText!.textContent = 'Submit Assessment Request';
+      btnSpinner?.classList.add('hidden');
+      btnArrow?.classList.remove('hidden');
+      if (window.turnstile && turnstileWidgetId) {
+        window.turnstile.reset(turnstileWidgetId);
+      }
+    }
+  });
+
+  function toggleFieldError(fieldId: string, show: boolean) {
+    const field = document.getElementById(fieldId);
+    const errorMsg = field?.parentElement?.querySelector('.field-error-msg');
+    if (show) {
+      field?.classList.add('border-rose-400');
+      errorMsg?.classList.remove('hidden');
+    } else {
+      field?.classList.remove('border-rose-400');
+      errorMsg?.classList.add('hidden');
+    }
+  }
+
+  function showFormError(msg: string, fallbackUrl?: string) {
+    if (errorBanner && errorText) {
+      errorText.textContent = msg;
+      errorBanner.classList.remove('hidden');
+      if (fallbackUrl && fallbackContainer && fallbackLink) {
+        fallbackLink.href = fallbackUrl;
+        fallbackContainer.classList.remove('hidden');
+      }
+    }
+  }
+</script>

@@ -1,0 +1,77 @@
+---
+// src/components/home/WhyEmberly.astro
+// 4 key differentiators flagged as sample claims for legal review
+import Icon from '../common/Icon.astro';
+
+const differentiators = [
+  {
+    title: 'Transparent, Real-Time Reporting*',
+    tag: 'No Black Boxes',
+    desc: 'Access live dashboards detailing clean claim percentages, denial reasons by payer, and rolling cash collections. We provide line-item transparency down to the individual encounter.',
+    icon: 'bar-chart-3'
+  },
+  {
+    title: 'Certified-Coder-Led QA*',
+    tag: 'AAPC / AHIMA Rigor',
+    desc: 'Every specialty charge is audited by credentialed CPC/CCS medical coders to ensure precise modifier usage, complete ICD-10 specificity, and zero documentation lag.',
+    icon: 'file-check'
+  },
+  {
+    title: 'US-Based Client Support Hours*',
+    tag: 'Dedicated Account Pods',
+    desc: 'Direct access to your dedicated practice manager during US Central Time business hours. No offshore ticket queues; you communicate directly with senior specialists.',
+    icon: 'clock'
+  },
+  {
+    title: 'Rapid 3-Week Onboarding*',
+    tag: 'Frictionless Transition',
+    desc: 'Structured implementation without disrupting daily clinical patient flow. We bridge seamlessly into AthenaHealth, eClinicalWorks, Epic, NextGen, Kareo, and AdvancedMD.',
+    icon: 'zap'
+  }
+];
+---
+
+<!-- Sample differentiators - Flagged for legal review prior to commercial launch -->
+<section class="py-16 sm:py-24 bg-emberly-warm-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">The Emberly Difference</span>
+      <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight">
+        Why Forward-Thinking Practices Choose Emberly Health
+      </h2>
+      <p class="mt-3 text-sm sm:text-base text-emberly-mid-gray">
+        Built specifically for US independent practices and specialized clinics tired of opacity, high denial rates, and impersonal billing vendors.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {differentiators.map((item) => (
+        <div class="flex items-start gap-5 p-6 sm:p-8 rounded-2xl bg-white border border-emberly-light-gray shadow-subtle hover:border-emberly-orange/40 subtle-lift transition-all">
+          <div class="w-12 h-12 rounded-xl bg-emberly-orange-tint flex items-center justify-center text-emberly-orange flex-shrink-0">
+            <Icon name={item.icon} class="w-6 h-6" />
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emberly-orange px-2 py-0.5 rounded bg-emberly-orange-tint">
+                {item.tag}
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-emberly-charcoal mb-2 font-heading">
+              {item.title}
+            </h3>
+            <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed">
+              {item.desc}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Review disclaimer tag -->
+    <div class="mt-8 text-center">
+      <p class="text-[11px] text-emberly-mid-gray italic">
+        *Placeholder differentiator copy flagged for client operational review. Operational timelines and reporting dashboards vary by client EHR integration scope.
+      </p>
+    </div>
+  </div>
+</section>

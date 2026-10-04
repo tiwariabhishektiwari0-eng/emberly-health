@@ -1,0 +1,30 @@
+---
+// src/pages/resources/[slug].astro
+// Dynamic article page rendering individual markdown guides
+import { getCollection } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('resources');
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+---
+
+<ArticleLayout
+  title={article.data.title}
+  description={article.data.description}
+  publishDate={article.data.publishDate}
+  author={article.data.author}
+  authorRole={article.data.authorRole}
+  readTime={article.data.readTime}
+  category={article.data.category}
+  tags={article.data.tags}
+>
+  <Content />
+</ArticleLayout>

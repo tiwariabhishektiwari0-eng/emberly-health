@@ -1,0 +1,33 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Environment variables — NEVER commit these
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Editor
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Wrangler (Cloudflare local dev)
+.wrangler/

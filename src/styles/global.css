@@ -1,0 +1,62 @@
+/* Self-hosted fonts via Fontsource - Zero Google Fonts runtime network requests */
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+@import '@fontsource/plus-jakarta-sans/800.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-orange: #F26B1D;
+    --brand-charcoal: #3F4650;
+    --brand-dark-charcoal: #2B2F36;
+    --brand-mid-gray: #6B7280;
+    --brand-light-gray: #E5E7EB;
+    --brand-warm-white: #FAF7F4;
+    --brand-orange-tint: #FFF1E8;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    background-color: var(--brand-warm-white);
+    color: var(--brand-charcoal);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    color: var(--brand-charcoal);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .subtle-lift {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .subtle-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .subtle-lift:hover {
+      transform: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}

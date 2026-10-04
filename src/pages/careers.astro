@@ -1,0 +1,177 @@
+---
+// src/pages/careers.astro
+// Careers Page: Culture blurb, benefits, 3 open roles, apply-by-email
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/common/Icon.astro';
+import { getCollection } from 'astro:content';
+
+const openRoles = await getCollection('roles');
+
+const benefits = [
+  { title: 'Remote-First Flexibility', desc: 'Work from anywhere in the United States with full ergonomic home office support.' },
+  { title: 'Continuing Education (CEUs)', desc: '100% employer reimbursement for AAPC, AHIMA, and MGMA annual dues and CEUs.' },
+  { title: 'Comprehensive Health & 401(k)', desc: 'Medical, dental, vision coverage plus company matching 401(k) retirement contributions.' },
+  { title: 'Collaborative Pod Culture', desc: 'Work alongside senior certified auditors and practice administrators who value precision and mutual support.' },
+];
+---
+
+<BaseLayout
+  title="Careers at Emberly Health | Join Our Revenue Cycle Team"
+  description="Explore career opportunities at Emberly Health. We are hiring certified medical coders, billing specialists, and healthcare client success managers across the US."
+>
+  <!-- Hero Section -->
+  <section class="py-14 sm:py-20 bg-white border-b border-emberly-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-4">
+          <span>Join Our Mission</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-emberly-charcoal font-heading tracking-tight leading-tight">
+          Build the Future of Healthcare Revenue Cycle Management
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-emberly-mid-gray leading-relaxed">
+          At Emberly Health, we respect the clinical precision of medical coding and the tenacity of accounts receivable recovery. We are building a remote-friendly, high-performance team that values expertise, integrity, and client trust.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Culture & Benefits Section -->
+  <section class="py-16 bg-emberly-warm-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Life at Emberly</span>
+        <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading">
+          Why You Will Love Working Here
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-emberly-mid-gray">
+          We treat our team members with the same respect, transparency, and care that we provide our medical practice partners.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {benefits.map((b) => (
+          <div class="p-6 rounded-2xl bg-white border border-emberly-light-gray shadow-subtle">
+            <div class="w-8 h-8 rounded-lg bg-emberly-orange-tint text-emberly-orange flex items-center justify-center mb-3">
+              <Icon name="check-circle" class="w-4 h-4" />
+            </div>
+            <h3 class="text-sm font-bold text-emberly-charcoal mb-2 font-heading">{b.title}</h3>
+            <p class="text-xs text-emberly-mid-gray leading-relaxed">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Positions List -->
+  <section class="py-16 sm:py-24 bg-white border-t border-emberly-light-gray" id="open-roles">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between mb-12">
+        <div>
+          <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Current Openings</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading mt-1">
+            Available Positions
+          </h2>
+        </div>
+        <span class="text-xs bg-emberly-orange-tint text-emberly-orange font-bold px-3 py-1 rounded-full">
+          3 Roles Open
+        </span>
+      </div>
+
+      <div class="space-y-8">
+        {openRoles.map((role) => (
+          <div class="p-6 sm:p-8 rounded-3xl bg-emberly-warm-white/60 border border-emberly-light-gray shadow-subtle">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-emberly-light-gray">
+              <div>
+                <span class="text-xs font-bold text-emberly-orange uppercase tracking-wider block mb-1">
+                  {role.data.department}
+                </span>
+                <h3 class="text-xl sm:text-2xl font-bold text-emberly-charcoal font-heading">
+                  {role.data.title}
+                </h3>
+                <div class="flex flex-wrap items-center gap-3 mt-2 text-xs text-emberly-mid-gray">
+                  <span class="flex items-center gap-1">
+                    <Icon name="map-pin" class="w-3.5 h-3.5 text-emberly-orange" />
+                    {role.data.location}
+                  </span>
+                  <span>&middot;</span>
+                  <span>{role.data.type}</span>
+                  <span>&middot;</span>
+                  <span>{role.data.experience}</span>
+                </div>
+              </div>
+
+              <div class="flex-shrink-0">
+                <a
+                  href={`mailto:careers@emberlyhealth.com?subject=${encodeURIComponent('Application: ' + role.data.title)}&body=${encodeURIComponent('Hello Emberly Health Hiring Team,\n\nI am writing to express my interest in the ' + role.data.title + ' role.\n\nPlease find my resume attached.\n\nBest regards,')}`}
+                  class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-emberly-orange text-white text-xs font-bold hover:bg-emberly-orange-hover shadow-sm subtle-lift transition-all"
+                >
+                  <Icon name="mail" class="w-3.5 h-3.5" />
+                  <span>Apply by Email</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Role Details -->
+            <div class="pt-6 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
+              <div>
+                <h4 class="font-bold uppercase tracking-wider text-emberly-charcoal mb-3 flex items-center gap-1.5">
+                  <Icon name="file-text" class="w-4 h-4 text-emberly-orange" />
+                  Key Responsibilities:
+                </h4>
+                <ul class="space-y-2">
+                  {role.data.responsibilities.map((resp) => (
+                    <li class="flex items-start gap-2 text-emberly-charcoal">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emberly-orange mt-1.5 flex-shrink-0"></span>
+                      <span>{resp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-bold uppercase tracking-wider text-emberly-charcoal mb-3 flex items-center gap-1.5">
+                  <Icon name="award" class="w-4 h-4 text-emberly-orange" />
+                  Qualifications & Skills:
+                </h4>
+                <ul class="space-y-2">
+                  {role.data.requirements.map((req) => (
+                    <li class="flex items-start gap-2 text-emberly-mid-gray">
+                      <Icon name="check" class="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                      <span>{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-[11px] text-emberly-mid-gray italic">
+          *Open positions represent sample career postings. Replace with live job descriptions and application email routing prior to commercial recruitment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spontaneous Applications -->
+  <section class="py-16 bg-emberly-warm-white border-t border-emberly-light-gray text-center">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <h3 class="text-xl sm:text-2xl font-bold text-emberly-charcoal font-heading mb-2">
+        Don't see your specific role listed?
+      </h3>
+      <p class="text-xs sm:text-sm text-emberly-mid-gray max-w-lg mx-auto mb-6">
+        We are always seeking certified coders, clearinghouse EDI specialists, and experienced healthcare billing leads. Send your resume and cover letter to our recruitment desk.
+      </p>
+      <a
+        href="mailto:careers@emberlyhealth.com?subject=General%20Application%20-%20Emberly%20Health"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-emberly-light-gray text-emberly-charcoal text-xs font-bold hover:border-emberly-orange hover:text-emberly-orange transition-all"
+      >
+        <Icon name="mail" class="w-4 h-4 text-emberly-orange" />
+        <span>Submit General Application (careers@emberlyhealth.com)</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

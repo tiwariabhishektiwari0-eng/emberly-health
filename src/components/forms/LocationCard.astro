@@ -1,0 +1,89 @@
+---
+// src/components/forms/LocationCard.astro
+// Styled location and contact card with "Get directions" link (no embedded third-party map)
+import Icon from '../common/Icon.astro';
+---
+
+<div class="bg-white border border-emberly-light-gray rounded-3xl p-6 sm:p-8 shadow-card flex flex-col justify-between h-full">
+  <div>
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-4">
+      <Icon name="map-pin" class="w-3.5 h-3.5" />
+      <span>Plano, Texas Headquarters</span>
+    </div>
+
+    <h3 class="text-xl sm:text-2xl font-extrabold text-emberly-charcoal font-heading mb-3">
+      Emberly Health LLC
+    </h3>
+    <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed mb-6">
+      Our operations center and executive leadership are based in the Dallas–Fort Worth metroplex, serving independent medical practices, surgical groups, and specialty clinics across all 50 US states.
+    </p>
+
+    <!-- Details list -->
+    <div class="space-y-4 text-xs sm:text-sm text-emberly-charcoal">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emberly-warm-white border border-emberly-light-gray flex items-center justify-center text-emberly-orange flex-shrink-0 mt-0.5">
+          <Icon name="map-pin" class="w-4 h-4" />
+        </div>
+        <div>
+          <strong class="block text-emberly-charcoal font-bold">Physical Address:</strong>
+          <span class="text-emberly-mid-gray">2400 Meridian Park Drive, Suite 310<br />Plano, TX 75024</span>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emberly-warm-white border border-emberly-light-gray flex items-center justify-center text-emberly-orange flex-shrink-0 mt-0.5">
+          <Icon name="phone" class="w-4 h-4" />
+        </div>
+        <div>
+          <strong class="block text-emberly-charcoal font-bold">Practice Inquiries Hotline:</strong>
+          <a href="tel:2145550147" class="text-emberly-orange font-semibold hover:underline">(214) 555-0147</a>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emberly-warm-white border border-emberly-light-gray flex items-center justify-center text-emberly-orange flex-shrink-0 mt-0.5">
+          <Icon name="mail" class="w-4 h-4" />
+        </div>
+        <div>
+          <strong class="block text-emberly-charcoal font-bold">General Inquiries & Intake:</strong>
+          <a href="mailto:hello@emberlyhealth.com" class="text-emberly-orange font-semibold hover:underline">hello@emberlyhealth.com</a>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emberly-warm-white border border-emberly-light-gray flex items-center justify-center text-emberly-orange flex-shrink-0 mt-0.5">
+          <Icon name="clock" class="w-4 h-4" />
+        </div>
+        <div>
+          <strong class="block text-emberly-charcoal font-bold">Client Support Operating Hours:</strong>
+          <span class="text-emberly-mid-gray">Monday &ndash; Friday: 8:00 AM &ndash; 6:00 PM Central Time (CT)</span>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emberly-warm-white border border-emberly-light-gray flex items-center justify-center text-emberly-orange flex-shrink-0 mt-0.5">
+          <Icon name="user-check" class="w-4 h-4" />
+        </div>
+        <div>
+          <strong class="block text-emberly-charcoal font-bold">Primary Practice Liaison:</strong>
+          <span class="text-emberly-mid-gray">Daniela Reyes, Director of Client Success</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Directions Link Card (No third-party iframe map!) -->
+  <div class="mt-8 pt-6 border-t border-emberly-light-gray">
+    <a
+      href="https://maps.google.com/?q=2400+Meridian+Park+Drive,+Plano,+TX+75024"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-emberly-warm-white border border-emberly-light-gray text-emberly-charcoal font-bold text-xs hover:border-emberly-orange hover:text-emberly-orange transition-colors"
+    >
+      <Icon name="map-pin" class="w-4 h-4 text-emberly-orange" />
+      <span>Get directions on Google Maps</span>
+      <Icon name="external-link" class="w-3.5 h-3.5 text-emberly-mid-gray" />
+    </a>
+  </div>
+</div>

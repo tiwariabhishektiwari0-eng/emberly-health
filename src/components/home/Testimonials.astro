@@ -1,0 +1,72 @@
+---
+// src/components/home/Testimonials.astro
+// Sample testimonials - Replace before launch with verified client references
+import Icon from '../common/Icon.astro';
+
+const testimonials = [
+  {
+    quote: "Switching our billing operations to Emberly Health stabilized our cash flow within the first 60 days. Their certified coders caught subtle modifier errors our previous agency consistently overlooked.",
+    author: "Dr. Karen Mitchell, MD*",
+    title: "Managing Partner & Physician Lead*",
+    practice: "Sample Independent Orthopedic Group (Plano, TX)*"
+  },
+  {
+    quote: "Our practice was overwhelmed with 90+ day commercial payer denials. Emberly's dedicated follow-up team systematically appealed every claim and recovered over $140,000 in previously abandoned revenue.",
+    author: "Robert Chen, MHA*",
+    title: "Practice Administrator*",
+    practice: "Sample Multi-Specialty Clinic Network (Dallas, TX)*"
+  },
+  {
+    quote: "The weekly transparency reporting is extraordinary. For the first time in ten years of practice management, I can clearly explain our days in A/R and denial root causes to our board of physicians.",
+    author: "Sarah Jenkins, CPC*",
+    title: "Director of Revenue Cycle*",
+    practice: "Sample Regional Cardiology Center (Fort Worth, TX)*"
+  }
+];
+---
+
+<!-- Sample testimonial component - Replace all quotes and fictional names with verified client approvals prior to commercial launch -->
+<section class="py-16 sm:py-24 bg-white border-t border-emberly-light-gray">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-2">
+        <span>Practice Partner Feedback</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight">
+        Trusted by Independent Practice Leaders
+      </h2>
+      <p class="mt-3 text-sm sm:text-base text-emberly-mid-gray">
+        See how specialized medical practices take back clinical focus and financial certainty with Emberly Health.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map((item) => (
+        <div class="flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-emberly-warm-white/70 border border-emberly-light-gray shadow-subtle hover:border-emberly-orange/40 subtle-lift transition-all">
+          <div>
+            <div class="flex items-center gap-1 text-emberly-orange mb-4">
+              <Icon name="sparkles" class="w-4 h-4" />
+              <span class="text-xs font-bold uppercase tracking-wider">Representative Case</span>
+            </div>
+            <p class="text-sm text-emberly-charcoal/90 leading-relaxed italic mb-6">
+              &ldquo;{item.quote}&rdquo;
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-emberly-light-gray/70">
+            <h4 class="text-xs font-bold text-emberly-charcoal">{item.author}</h4>
+            <p class="text-[11px] text-emberly-orange font-semibold">{item.title}</p>
+            <p class="text-[11px] text-emberly-mid-gray">{item.practice}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Review tag -->
+    <div class="mt-8 text-center">
+      <p class="text-[11px] text-emberly-mid-gray italic">
+        *Sample illustrative feedback. Real testimonials and client references will be finalized prior to live commercial deployment as documented in LAUNCH_CHECKLIST.md.
+      </p>
+    </div>
+  </div>
+</section>

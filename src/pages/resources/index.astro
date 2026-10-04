@@ -1,0 +1,99 @@
+---
+// src/pages/resources/index.astro
+// Educational Knowledge Base & Insights Hub
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/common/Icon.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('resources');
+const sortedArticles = allArticles.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+---
+
+<BaseLayout
+  title="Healthcare RCM Guides, Coding Checklists & Practice Insights | Emberly Health"
+  description="Explore actionable articles, coding checklists, and revenue cycle best practices written by Emberly Health's certified coding auditors and billing directors."
+>
+  <!-- Hero Section -->
+  <section class="py-14 sm:py-20 bg-white border-b border-emberly-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-4">
+          <span>Practice Intelligence</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-emberly-charcoal font-heading tracking-tight leading-tight">
+          Healthcare Revenue Cycle Guides & Insights
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-emberly-mid-gray leading-relaxed">
+          Actionable analyses, regulatory updates, and coding checklists designed to help practice administrators and physician executives prevent denials and protect clinical margins.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles List -->
+  <section class="py-16 sm:py-24 bg-emberly-warm-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {sortedArticles.map((article) => (
+          <article class="bg-white border border-emberly-light-gray rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-subtle hover:border-emberly-orange/50 hover:shadow-lift subtle-lift transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-emberly-orange px-2.5 py-0.5 rounded-full bg-emberly-orange-tint">
+                  {article.data.category}
+                </span>
+                <span class="text-xs text-emberly-mid-gray flex items-center gap-1">
+                  <Icon name="clock" class="w-3.5 h-3.5" />
+                  {article.data.readTime}
+                </span>
+              </div>
+
+              <h2 class="text-lg sm:text-xl font-bold text-emberly-charcoal hover:text-emberly-orange transition-colors font-heading mb-3">
+                <a href={`/resources/${article.slug}`}>
+                  {article.data.title}
+                </a>
+              </h2>
+
+              <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed mb-6">
+                {article.data.description}
+              </p>
+            </div>
+
+            <div>
+              <div class="pt-4 border-t border-emberly-light-gray flex items-center justify-between">
+                <div class="text-[11px] text-emberly-mid-gray">
+                  By <strong class="text-emberly-charcoal">{article.data.author}</strong>
+                </div>
+                <a
+                  href={`/resources/${article.slug}`}
+                  class="inline-flex items-center gap-1 text-xs font-bold text-emberly-orange hover:text-emberly-orange-hover"
+                >
+                  <span>Read guide</span>
+                  <Icon name="arrow-right" class="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Assessment Band -->
+  <section class="py-16 bg-white border-t border-emberly-light-gray text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <h3 class="text-2xl font-bold text-emberly-charcoal font-heading mb-2">
+        Have a specific billing question regarding your practice?
+      </h3>
+      <p class="text-xs sm:text-sm text-emberly-mid-gray max-w-lg mx-auto mb-6">
+        Our clinical coding auditors and billing specialists review practice documentation every day. Contact us for a personalized review.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emberly-orange text-white text-xs font-bold hover:bg-emberly-orange-hover shadow-sm transition-all"
+      >
+        <span>Request a practice review</span>
+        <Icon name="arrow-right" class="w-3.5 h-3.5" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

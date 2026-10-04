@@ -1,0 +1,109 @@
+---
+// src/pages/services/index.astro
+// Services Overview Hub
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/common/Icon.astro';
+import { getCollection } from 'astro:content';
+
+const allServices = await getCollection('services');
+const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Healthcare Revenue Cycle Management Services | Emberly Health"
+  description="Explore Emberly Health's 8 comprehensive RCM services: medical billing, certified coding, end-to-end RCM, denial appeals, A/R follow-up, and credentialing."
+>
+  <!-- Page Header -->
+  <section class="py-14 sm:py-20 bg-white border-b border-emberly-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-4">
+          <span>Complete RCM Capabilities</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-emberly-charcoal font-heading tracking-tight leading-tight">
+          Revenue Cycle Services Engineered for US Medical Practices
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-emberly-mid-gray leading-relaxed">
+          From front-office patient eligibility to aggressive denial recovery, Emberly Health provides specialized operational solutions tailored to the clinical needs of independent physician practices, surgery groups, and specialty clinics.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 Services Cards Grid -->
+  <section class="py-16 sm:py-24 bg-emberly-warm-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {sortedServices.map((service) => (
+          <div class="group bg-white border border-emberly-light-gray rounded-3xl p-8 flex flex-col justify-between shadow-subtle hover:border-emberly-orange/50 hover:shadow-lift subtle-lift transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-emberly-orange px-2.5 py-0.5 rounded-full bg-emberly-orange-tint">
+                  Service 0{service.data.order}
+                </span>
+                <div class="w-10 h-10 rounded-xl bg-emberly-warm-white border border-emberly-light-gray flex items-center justify-center text-emberly-charcoal group-hover:text-emberly-orange group-hover:border-emberly-orange/40 transition-colors">
+                  <Icon name={service.data.icon} class="w-5 h-5" />
+                </div>
+              </div>
+
+              <h2 class="text-xl sm:text-2xl font-bold text-emberly-charcoal group-hover:text-emberly-orange transition-colors font-heading mb-2">
+                <a href={`/services/${service.slug}`} class="focus:outline-none">
+                  {service.data.title}
+                </a>
+              </h2>
+
+              <p class="text-xs font-semibold text-emberly-orange mb-3">
+                {service.data.tagline}
+              </p>
+
+              <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed mb-6">
+                {service.data.description}
+              </p>
+
+              <div class="space-y-2 mb-6">
+                <span class="text-xs font-bold uppercase tracking-wider text-emberly-charcoal block">Key Deliverables:</span>
+                <ul class="space-y-1.5">
+                  {service.data.highlights.map((h) => (
+                    <li class="flex items-center gap-2 text-xs text-emberly-charcoal">
+                      <Icon name="check" class="w-3.5 h-3.5 text-emberly-orange flex-shrink-0" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="pt-5 border-t border-emberly-light-gray flex items-center justify-between">
+              <a
+                href={`/services/${service.slug}`}
+                class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-emberly-orange hover:text-emberly-orange-hover"
+              >
+                <span>Read full service specifications</span>
+                <Icon name="arrow-right" class="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Practice Assessment Band -->
+  <section class="py-16 bg-white border-t border-emberly-light-gray text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading mb-3">
+        Not sure which service scope fits your practice?
+      </h3>
+      <p class="text-sm text-emberly-mid-gray max-w-xl mx-auto mb-8">
+        We offer free operational assessments analyzing your last 90 days of remittances to identify whether you need targeted coding support, an aged A/R clean-up, or full turnkey RCM stewardship.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emberly-orange text-white font-bold text-sm hover:bg-emberly-orange-hover shadow-card subtle-lift transition-all"
+      >
+        <span>Request a practice assessment</span>
+        <Icon name="arrow-right" class="w-4 h-4" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

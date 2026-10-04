@@ -1,0 +1,50 @@
+---
+// src/pages/index.astro
+// Primary Home Page for Emberly Health
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import TrustMetrics from '../components/home/TrustMetrics.astro';
+import RevenueJourney from '../components/home/RevenueJourney.astro';
+import ServicesBento from '../components/home/ServicesBento.astro';
+import WhyEmberly from '../components/home/WhyEmberly.astro';
+import SpecialtiesGrid from '../components/home/SpecialtiesGrid.astro';
+import HowWeWork from '../components/home/HowWeWork.astro';
+import Testimonials from '../components/home/Testimonials.astro';
+import FaqSection from '../components/home/FaqSection.astro';
+import DarkCtaBand from '../components/home/DarkCtaBand.astro';
+---
+
+<BaseLayout
+  title="Emberly Health | Medical Billing, Certified Coding & End-to-End RCM"
+  description="Emberly Health delivers precision medical billing, certified medical coding, and full revenue cycle management for US independent practices and specialized clinics."
+>
+  <!-- 1. Hero Section with original SVG loop diagram -->
+  <HeroSection />
+
+  <!-- 2. Trust Strip with 4 sample performance metrics -->
+  <TrustMetrics />
+
+  <!-- 3. Interactive 7-Step Revenue Cycle Journey Timeline -->
+  <RevenueJourney />
+
+  <!-- 4. Services Bento Grid -->
+  <ServicesBento />
+
+  <!-- 5. Why Emberly (4 Differentiators) -->
+  <WhyEmberly />
+
+  <!-- 6. 9 Specialties Chip Grid -->
+  <SpecialtiesGrid />
+
+  <!-- 7. How We Work (Assess > Onboard > Optimize) -->
+  <HowWeWork />
+
+  <!-- 8. Testimonials (Clearly marked sample components) -->
+  <Testimonials />
+
+  <!-- 9. FAQ Accordion (6 Questions) -->
+  <FaqSection />
+
+  <!-- 10. Dark Charcoal CTA Band -->
+  <DarkCtaBand />
+</BaseLayout>

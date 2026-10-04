@@ -1,0 +1,268 @@
+---
+// src/pages/about.astro
+// About Emberly Health: Story, Mission, Original Values, Fictional Leadership, Data Protection
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/common/Icon.astro';
+
+const values = [
+  {
+    name: 'Clinical Precision',
+    desc: 'We treat coding as a scientific discipline, not clerical data-entry. Every modifier, ICD-10 character, and CPT code is verified against authentic clinical documentation to withstand payer scrutiny.'
+  },
+  {
+    name: 'Radical Ledger Clarity',
+    desc: 'No obscured metrics, hidden write-offs, or vague monthly summaries. We provide line-item transparency into every cash deposit, contractual adjustment, and clearinghouse rejection.'
+  },
+  {
+    name: 'Relentless Recovery',
+    desc: 'We refuse to accept that valid medical claims should be written off because payers make appeals difficult. If your physicians provided legitimate clinical care, we fight for every earned dollar.'
+  },
+  {
+    name: 'Partner-First Stewardship',
+    desc: 'We never view ourselves as an outside vendor. We operate as an integrated administrative extension of your medical practice, aligning our compensation directly with your cash collections.'
+  }
+];
+
+const leadership = [
+  {
+    name: 'Daniela Reyes',
+    title: 'Director of Client Success',
+    bio: 'Over 14 years of physician practice management and RCM leadership. Specializes in EHR transitions, provider fee schedule optimization, and executive client partnerships across independent clinic networks.'
+  },
+  {
+    name: 'Marcus Vance',
+    title: 'Managing Director of Operations',
+    bio: 'Healthcare operational strategist with extensive background in electronic clearinghouse architecture, large-scale A/R recovery, and revenue cycle automation for multi-specialty medical groups.'
+  },
+  {
+    name: 'Dr. Eleanor Wright, MD, CPC*',
+    title: 'Chief Clinical & Coding Officer*',
+    bio: 'Board-certified internal medicine physician and certified professional coder. Oversees our dual-layer clinical QA audits and conducts quarterly physician documentation training sessions.'
+  },
+  {
+    name: 'Thomas Chen',
+    title: 'Senior Director of Health IT & Integration',
+    bio: 'Leads our EHR and clearinghouse integration bridges. Expert in HL7 interfaces, 837/835 electronic EDI protocols, and HIPAA-compliant role-based security configurations.'
+  }
+];
+---
+
+<BaseLayout
+  title="About Emberly Health | Mission, Values & Leadership"
+  description="Learn about Emberly Health's mission to eliminate administrative friction and accelerate cash flow for US medical practices through certified coding and transparent RCM."
+>
+  <!-- Hero Section -->
+  <section class="py-14 sm:py-20 bg-white border-b border-emberly-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-4">
+          <span>Our Origin & Purpose</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-emberly-charcoal font-heading tracking-tight leading-tight">
+          Restoring Financial Certainty to US Medical Practices
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-emberly-mid-gray leading-relaxed">
+          Emberly Health was founded on a simple conviction: independent physicians and specialized medical clinics should be compensated promptly and fully for the vital care they provide.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story & Mission Section -->
+  <section class="py-16 sm:py-20 bg-emberly-warm-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-6">
+          <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">The Emberly Narrative</span>
+          <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading mb-4">
+            Why We Built Emberly Health
+          </h2>
+          <div class="space-y-4 text-xs sm:text-sm text-emberly-charcoal/90 leading-relaxed">
+            <p>
+              Over the past decade, independent medical practices across the United States have faced an uphill battle. Payer rules have multiplied, commercial reimbursement has tightened, and the administrative burden of running an internal billing department has skyrocketed.
+            </p>
+            <p>
+              Traditional billing agencies often treated practices as interchangeable ticket queues. Unpaid claims were quietly written off, communication was outsourced offshore, and practice administrators were left with opaque monthly reports that hid mounting aged receivables.
+            </p>
+            <p>
+              Emberly Health was established in Plano, Texas to provide a stark alternative. We combined credentialed coding rigor with transparent, performance-aligned revenue cycle stewardship. When you partner with Emberly, you gain a dedicated team of US-based specialists who treat your financial ledger with the same care as your physicians treat their patients.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 bg-white border border-emberly-light-gray rounded-3xl p-8 shadow-card">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-emberly-orange mb-3">Our Core Mission</h3>
+          <p class="text-xl sm:text-2xl font-extrabold text-emberly-charcoal font-heading leading-snug mb-6">
+            &ldquo;To eliminate administrative revenue cycle friction for US healthcare providers through clinical coding precision, aggressive denial prevention, and complete ledger transparency.&rdquo;
+          </p>
+
+          <div class="pt-6 border-t border-emberly-light-gray grid grid-cols-2 gap-4 text-xs">
+            <div>
+              <span class="text-emberly-orange font-bold text-lg block font-heading">100%</span>
+              <span class="text-emberly-mid-gray">AAPC / AHIMA certified coding oversight</span>
+            </div>
+            <div>
+              <span class="text-emberly-orange font-bold text-lg block font-heading">US Central</span>
+              <span class="text-emberly-mid-gray">Time zone real-time support hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Original Values Section -->
+  <section class="py-16 sm:py-24 bg-white border-t border-emberly-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Guiding Principles</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight">
+          Our Four Core Values
+        </h2>
+        <p class="mt-3 text-sm text-emberly-mid-gray">
+          The operational standards that dictate every claim scrub, appeal letter, and client communication.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {values.map((val, idx) => (
+          <div class="p-8 rounded-2xl bg-emberly-warm-white/70 border border-emberly-light-gray shadow-subtle flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-emberly-orange px-2.5 py-0.5 rounded-full bg-emberly-orange-tint">
+                  Value 0{idx + 1}
+                </span>
+                <Icon name="award" class="w-5 h-5 text-emberly-orange" />
+              </div>
+              <h3 class="text-xl font-bold text-emberly-charcoal mb-3 font-heading">
+                {val.name}
+              </h3>
+              <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed">
+                {val.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Fictional Leadership Profiles -->
+  <section class="py-16 sm:py-24 bg-emberly-warm-white border-t border-emberly-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Practice Leadership</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight">
+          Meet Our Executive Team
+        </h2>
+        <p class="mt-3 text-sm text-emberly-mid-gray">
+          Experienced healthcare revenue cycle professionals dedicated to client success and operational excellence.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {leadership.map((leader) => (
+          <div class="bg-white border border-emberly-light-gray rounded-2xl p-6 shadow-subtle flex flex-col justify-between">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-emberly-warm-white border border-emberly-light-gray flex items-center justify-center text-emberly-charcoal font-heading font-extrabold text-lg mb-4 text-emberly-orange">
+                {leader.name.split(' ').map(n => n[0]).join('')}
+              </div>
+              <h3 class="text-base font-bold text-emberly-charcoal font-heading">
+                {leader.name}
+              </h3>
+              <p class="text-xs font-semibold text-emberly-orange mb-3">
+                {leader.title}
+              </p>
+              <p class="text-xs text-emberly-mid-gray leading-relaxed">
+                {leader.bio}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 text-center">
+        <p class="text-[11px] text-emberly-mid-gray italic">
+          *Leadership biographies and team profiles represent sample executive personnel flagged for final client confirmation prior to commercial launch as noted in LAUNCH_CHECKLIST.md.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Protect Your Data Section (Flagged for legal review) -->
+  <section class="py-16 sm:py-24 bg-white border-t border-emberly-light-gray" id="data-protection">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="p-8 sm:p-10 rounded-3xl bg-emberly-warm-white border border-emberly-light-gray shadow-card">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-4">
+          <Icon name="shield-check" class="w-4 h-4" />
+          <span>Data Governance & Compliance</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading mb-4">
+          How We Protect Your Practice & Patient Data
+        </h2>
+
+        <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed mb-6">
+          Emberly Health recognizes that patient health information (PHI) and clinical billing ledgers represent your medical practice's most confidential assets. We operate under rigorous HIPAA-aware security frameworks designed to safeguard data integrity and confidentiality.
+        </p>
+
+        <div class="space-y-4 text-xs sm:text-sm text-emberly-charcoal">
+          <div class="flex items-start gap-3">
+            <Icon name="check-circle" class="w-4 h-4 text-emberly-orange flex-shrink-0 mt-0.5" />
+            <div>
+              <strong class="font-bold">Business Associate Agreements (BAAs):</strong>
+              <p class="text-emberly-mid-gray mt-0.5">We execute formal, comprehensive BAAs with every medical practice partner prior to accessing any clinical or financial systems.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <Icon name="check-circle" class="w-4 h-4 text-emberly-orange flex-shrink-0 mt-0.5" />
+            <div>
+              <strong class="font-bold">Role-Based Access Control & MFA:</strong>
+              <p class="text-emberly-mid-gray mt-0.5">Our specialists access your EHR/PM solely through encrypted, authenticated role-based sessions requiring multi-factor authentication (MFA).</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <Icon name="check-circle" class="w-4 h-4 text-emberly-orange flex-shrink-0 mt-0.5" />
+            <div>
+              <strong class="font-bold">Zero Local PHI Storage:</strong>
+              <p class="text-emberly-mid-gray mt-0.5">We do not download, export, or store patient health records on local devices. All workflows occur directly inside your hosted practice software.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <Icon name="check-circle" class="w-4 h-4 text-emberly-orange flex-shrink-0 mt-0.5" />
+            <div>
+              <strong class="font-bold">Annual Security & HIPAA Training:</strong>
+              <p class="text-emberly-mid-gray mt-0.5">100% of Emberly Health personnel complete mandatory annual certification in HIPAA Privacy, Security, and Breach Notification rules.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-emberly-light-gray text-[11px] text-emberly-mid-gray italic">
+          Notice: The data protection descriptions above represent general administrative protocols flagged for corporate legal counsel review prior to publication.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-16 sm:py-20 bg-emberly-dark-charcoal text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl font-extrabold font-heading mb-3">
+        Partner with a revenue cycle team that shares your values.
+      </h2>
+      <p class="text-xs sm:text-sm text-emberly-light-gray/80 max-w-xl mx-auto mb-8 leading-relaxed">
+        Let us conduct a confidential review of your current practice billing and reveal exact revenue opportunities.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emberly-orange text-white font-bold text-sm hover:bg-emberly-orange-hover shadow-card subtle-lift transition-all"
+      >
+        <span>Request your free practice assessment</span>
+        <Icon name="arrow-right" class="w-4 h-4" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

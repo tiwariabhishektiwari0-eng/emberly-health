@@ -1,0 +1,275 @@
+---
+// src/components/common/Header.astro
+// Floating, centered pill-shaped top nav with shrink on scroll, mega-menu, and mobile drawer
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+const servicesList = [
+  { title: 'Medical Billing', href: '/services/medical-billing', desc: 'Electronic claim scrubbing, secondary claims & billing reconciliation' },
+  { title: 'Medical Coding', href: '/services/medical-coding', desc: 'AAPC/AHIMA certified coding with dual-layer QA audits' },
+  { title: 'End-to-End RCM', href: '/services/end-to-end-rcm', desc: 'Complete revenue cycle management from intake to collections' },
+  { title: 'Denial Management & Appeals', href: '/services/denial-management-and-appeals', desc: 'Root-cause CARC/RARC analysis and high-velocity overturns' },
+  { title: 'A/R Follow-up', href: '/services/ar-follow-up', desc: 'Aged receivable recovery across 30, 60, 90, 120+ day buckets' },
+  { title: 'Eligibility & Prior Auth', href: '/services/eligibility-verification-prior-auth', desc: '48-hour pre-encounter verification and authorization pre-clearing' },
+  { title: 'Provider Credentialing', href: '/services/provider-credentialing', desc: 'CAQH enrollment, payer contracting, and re-credentialing alerts' },
+  { title: 'Patient Billing & Posting', href: '/services/patient-billing-payment-posting', desc: 'Daily ERA/EOB posting and patient statement workflows' },
+];
+---
+
+<header class="sticky top-3 sm:top-5 z-50 px-4 sm:px-6 w-full max-w-6xl mx-auto">
+  <!-- Centered Floating Pill Navigation Container -->
+  <nav
+    id="main-nav-pill"
+    class="bg-white/95 backdrop-blur-md border border-emberly-light-gray shadow-pill rounded-full transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between"
+    aria-label="Main Navigation"
+  >
+    <!-- Logo -->
+    <div class="flex-shrink-0">
+      <Logo size="sm" />
+    </div>
+
+    <!-- Desktop Nav Links -->
+    <div class="hidden lg:flex items-center gap-1 xl:gap-2">
+      <!-- Services Dropdown with Mega-Menu Trigger -->
+      <div class="relative group" id="services-mega-menu-container">
+        <button
+          type="button"
+          id="services-menu-btn"
+          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-medium text-emberly-charcoal hover:text-emberly-orange hover:bg-emberly-orange-tint/40 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emberly-orange"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <span>Services</span>
+          <Icon name="chevron-down" class="w-4 h-4 text-emberly-mid-gray transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" />
+        </button>
+
+        <!-- Services Mega-Menu Dropdown Panel -->
+        <div
+          id="services-mega-menu"
+          class="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[720px] bg-white border border-emberly-light-gray rounded-2xl shadow-lift p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 z-50"
+        >
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-emberly-light-gray">
+            <div>
+              <p class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Revenue Cycle Solutions</p>
+              <h4 class="text-sm font-bold text-emberly-charcoal">Comprehensive Clinical & Financial Operations</h4>
+            </div>
+            <a href="/services" class="text-xs font-semibold text-emberly-orange hover:underline inline-flex items-center gap-1">
+              View all services <Icon name="arrow-right" class="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            {servicesList.map((service) => (
+              <a
+                href={service.href}
+                class="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-emberly-warm-white transition-colors"
+              >
+                <div class="w-8 h-8 rounded-lg bg-emberly-orange-tint flex items-center justify-center text-emberly-orange flex-shrink-0 group-hover/item:bg-emberly-orange group-hover/item:text-white transition-colors">
+                  <Icon name="check-circle" class="w-4 h-4" />
+                </div>
+                <div>
+                  <h5 class="text-xs font-bold text-emberly-charcoal group-hover/item:text-emberly-orange transition-colors">
+                    {service.title}
+                  </h5>
+                  <p class="text-[11px] text-emberly-mid-gray line-clamp-1 leading-snug">
+                    {service.desc}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-emberly-light-gray bg-emberly-orange-tint/40 -mx-6 -mb-6 px-6 py-3 rounded-b-2xl flex items-center justify-between">
+            <span class="text-xs text-emberly-charcoal font-medium">Unsure which RCM model fits your claim volume?</span>
+            <a href="/contact" class="text-xs font-bold text-emberly-orange hover:text-emberly-orange-hover inline-flex items-center gap-1">
+              Request a free practice audit <Icon name="chevron-right" class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a
+        href="/specialties"
+        class="px-3.5 py-1.5 rounded-full text-sm font-medium text-emberly-charcoal hover:text-emberly-orange hover:bg-emberly-orange-tint/40 transition-colors"
+      >
+        Specialties
+      </a>
+      <a
+        href="/about"
+        class="px-3.5 py-1.5 rounded-full text-sm font-medium text-emberly-charcoal hover:text-emberly-orange hover:bg-emberly-orange-tint/40 transition-colors"
+      >
+        About
+      </a>
+      <a
+        href="/resources"
+        class="px-3.5 py-1.5 rounded-full text-sm font-medium text-emberly-charcoal hover:text-emberly-orange hover:bg-emberly-orange-tint/40 transition-colors"
+      >
+        Resources
+      </a>
+      <a
+        href="/careers"
+        class="px-3.5 py-1.5 rounded-full text-sm font-medium text-emberly-charcoal hover:text-emberly-orange hover:bg-emberly-orange-tint/40 transition-colors"
+      >
+        Careers
+      </a>
+      <a
+        href="/contact"
+        class="px-3.5 py-1.5 rounded-full text-sm font-medium text-emberly-charcoal hover:text-emberly-orange hover:bg-emberly-orange-tint/40 transition-colors"
+      >
+        Contact
+      </a>
+    </div>
+
+    <!-- Right-side Action: Orange CTA Button -->
+    <div class="hidden sm:flex items-center gap-3">
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emberly-orange text-white text-xs sm:text-sm font-semibold hover:bg-emberly-orange-hover shadow-sm transition-all subtle-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-emberly-orange focus-visible:ring-offset-2"
+      >
+        <span>Book a free assessment</span>
+        <Icon name="arrow-right" class="w-3.5 h-3.5" />
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger Button -->
+    <button
+      type="button"
+      id="mobile-menu-trigger"
+      class="lg:hidden p-2 rounded-full text-emberly-charcoal hover:bg-emberly-warm-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emberly-orange"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-drawer"
+    >
+      <Icon name="menu" class="w-6 h-6" />
+    </button>
+  </nav>
+
+  <!-- Full-Screen Slide-in Mobile Navigation Drawer -->
+  <div
+    id="mobile-drawer"
+    class="fixed inset-0 bg-emberly-dark-charcoal/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
+    aria-hidden="true"
+  >
+    <div
+      id="mobile-drawer-content"
+      class="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out"
+    >
+      <div>
+        <!-- Top bar with close button -->
+        <div class="flex items-center justify-between pb-6 border-b border-emberly-light-gray">
+          <Logo size="sm" />
+          <button
+            type="button"
+            id="mobile-menu-close"
+            class="p-2 rounded-full text-emberly-charcoal hover:bg-emberly-warm-white focus:outline-none"
+            aria-label="Close navigation menu"
+          >
+            <Icon name="close" class="w-6 h-6" />
+          </button>
+        </div>
+
+        <!-- Links List with large tap targets -->
+        <div class="py-6 flex flex-col gap-1">
+          <div class="pb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-emberly-mid-gray px-3">Main</span>
+          </div>
+          <a href="/" class="px-3 py-2.5 rounded-xl text-base font-semibold text-emberly-charcoal hover:bg-emberly-warm-white hover:text-emberly-orange">
+            Home
+          </a>
+          <a href="/services" class="px-3 py-2.5 rounded-xl text-base font-semibold text-emberly-charcoal hover:bg-emberly-warm-white hover:text-emberly-orange flex items-center justify-between">
+            <span>All Services</span>
+            <span class="text-xs bg-emberly-orange-tint text-emberly-orange font-bold px-2 py-0.5 rounded-full">8 Offerings</span>
+          </a>
+          <a href="/specialties" class="px-3 py-2.5 rounded-xl text-base font-semibold text-emberly-charcoal hover:bg-emberly-warm-white hover:text-emberly-orange">
+            Specialties
+          </a>
+          <a href="/about" class="px-3 py-2.5 rounded-xl text-base font-semibold text-emberly-charcoal hover:bg-emberly-warm-white hover:text-emberly-orange">
+            About Us
+          </a>
+          <a href="/resources" class="px-3 py-2.5 rounded-xl text-base font-semibold text-emberly-charcoal hover:bg-emberly-warm-white hover:text-emberly-orange">
+            Resources & Guides
+          </a>
+          <a href="/careers" class="px-3 py-2.5 rounded-xl text-base font-semibold text-emberly-charcoal hover:bg-emberly-warm-white hover:text-emberly-orange">
+            Careers
+          </a>
+          <a href="/contact" class="px-3 py-2.5 rounded-xl text-base font-semibold text-emberly-charcoal hover:bg-emberly-warm-white hover:text-emberly-orange">
+            Contact & Location
+          </a>
+        </div>
+      </div>
+
+      <!-- Drawer Bottom CTA -->
+      <div class="pt-6 border-t border-emberly-light-gray flex flex-col gap-3">
+        <a
+          href="/contact"
+          class="w-full py-3 px-4 bg-emberly-orange text-white text-center font-bold rounded-xl hover:bg-emberly-orange-hover shadow-sm transition-colors text-sm"
+        >
+          Book a free assessment
+        </a>
+        <div class="text-center">
+          <p class="text-xs text-emberly-mid-gray">Direct practice hotline:</p>
+          <a href="tel:2145550147" class="text-xs font-semibold text-emberly-charcoal hover:text-emberly-orange">
+            (214) 555-0147
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Shrink-on-scroll and mobile drawer interactivity
+  const navPill = document.getElementById('main-nav-pill');
+  const triggerBtn = document.getElementById('mobile-menu-trigger');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  const drawer = document.getElementById('mobile-drawer');
+  const drawerContent = document.getElementById('mobile-drawer-content');
+
+  // Shrink on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      navPill?.classList.add('py-2', 'shadow-lift');
+      navPill?.classList.remove('py-2.5', 'sm:py-3');
+    } else {
+      navPill?.classList.remove('py-2', 'shadow-lift');
+      navPill?.classList.add('py-2.5', 'sm:py-3');
+    }
+  }, { passive: true });
+
+  // Open drawer
+  function openMobileMenu() {
+    drawer?.classList.remove('opacity-0', 'pointer-events-none');
+    drawer?.classList.add('opacity-100');
+    drawerContent?.classList.remove('translate-x-full');
+    triggerBtn?.setAttribute('aria-expanded', 'true');
+    drawer?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close drawer
+  function closeMobileMenu() {
+    drawer?.classList.add('opacity-0', 'pointer-events-none');
+    drawer?.classList.remove('opacity-100');
+    drawerContent?.classList.add('translate-x-full');
+    triggerBtn?.setAttribute('aria-expanded', 'false');
+    drawer?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  triggerBtn?.addEventListener('click', openMobileMenu);
+  closeBtn?.addEventListener('click', closeMobileMenu);
+
+  // Close when clicking outside drawer content
+  drawer?.addEventListener('click', (e) => {
+    if (e.target === drawer) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer?.getAttribute('aria-hidden') === 'false') {
+      closeMobileMenu();
+    }
+  });
+</script>

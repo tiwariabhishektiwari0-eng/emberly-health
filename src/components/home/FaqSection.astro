@@ -1,0 +1,115 @@
+---
+// src/components/home/FaqSection.astro
+// Accessible 6-part FAQ accordion with keyboard interaction
+import Icon from '../common/Icon.astro';
+
+const faqs = [
+  {
+    question: "How quickly can Emberly Health onboard our medical practice?",
+    answer: "Our typical onboarding timeline is 2 to 3 weeks. During Phase 1, we execute a mutual Business Associate Agreement (BAA) and conduct a comprehensive revenue audit. In Phase 2, we establish user accounts in your EHR/PM system, configure clearinghouse scrub rules, and align provider fee schedules. There is zero disruption to your daily patient schedule."
+  },
+  {
+    question: "Which EHR and Practice Management systems do you work with?",
+    answer: "We support all major cloud-based and on-premise healthcare platforms including AthenaHealth, eClinicalWorks, Epic, NextGen, Kareo (Tebra), AdvancedMD, Allscripts/Veradigm, ModMed, and Greenway. We work directly inside your existing software, so you never lose control of your clinical patient charts or historical financial ledgers."
+  },
+  {
+    question: "Are your medical coders credentialed and US-certified?",
+    answer: "Yes. All coding operations are led and reviewed by medical coders holding active credentials from the American Academy of Professional Coders (AAPC) or the American Health Information Management Association (AHIMA), including CPC, COC, CIC, and CCS certifications. We maintain a dual-layer QA process to guarantee high coding specificity and NCCI edit compliance."
+  },
+  {
+    question: "How does Emberly Health structure its service fees?",
+    answer: "For end-to-end RCM and billing services, our pricing is strictly performance-aligned: a transparent percentage of net cash collected. If you don't get paid, we don't get paid. For targeted coding or credentialing projects, we also provide fixed monthly or per-claim fee schedules tailored to your practice size and claim volume."
+  },
+  {
+    question: "What is included in the free practice revenue assessment?",
+    answer: "Our zero-obligation revenue assessment examines your last 90 to 180 days of electronic clearinghouse remittance data. We evaluate your clean claim pass rate, categorize your top 5 Claim Adjustment Reason Codes (CARCs), benchmark your average days in A/R against your clinical specialty, and deliver a written report outlining specific recoverable revenue."
+  },
+  {
+    question: "How do you protect patient health information (PHI) and maintain HIPAA compliance?",
+    answer: "We adhere strictly to HIPAA-aware administrative, technical, and physical safeguards. All team members undergo mandatory annual HIPAA privacy and security training. We access your systems exclusively through secure, encrypted role-based connections with multi-factor authentication (MFA). We never export, sell, or locally store identifiable patient records."
+  }
+];
+---
+
+<section class="py-16 sm:py-24 bg-emberly-warm-white border-t border-emberly-light-gray" id="faq-section">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Answers & Clarity</span>
+      <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight">
+        Frequently Asked Questions
+      </h2>
+      <p class="mt-3 text-sm sm:text-base text-emberly-mid-gray">
+        Everything practice administrators, physicians, and billing managers ask when evaluating Emberly Health.
+      </p>
+    </div>
+
+    <!-- Accordion List -->
+    <div class="space-y-4">
+      {faqs.map((faq, idx) => (
+        <div class="faq-item border border-emberly-light-gray rounded-2xl bg-white transition-colors overflow-hidden">
+          <button
+            type="button"
+            class="faq-trigger w-full flex items-center justify-between p-5 sm:p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-emberly-orange"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${idx}`}
+            id={`faq-btn-${idx}`}
+          >
+            <span class="text-sm sm:text-base font-bold text-emberly-charcoal pr-4 font-heading">
+              {faq.question}
+            </span>
+            <div class="w-8 h-8 rounded-full bg-emberly-warm-white flex items-center justify-center text-emberly-charcoal flex-shrink-0 transition-transform duration-200 faq-icon">
+              <Icon name="chevron-down" class="w-4 h-4" />
+            </div>
+          </button>
+          <div
+            id={`faq-answer-${idx}`}
+            role="region"
+            aria-labelledby={`faq-btn-${idx}`}
+            class="faq-content hidden px-5 sm:px-6 pb-6 text-xs sm:text-sm text-emberly-mid-gray leading-relaxed border-t border-emberly-light-gray/40 pt-4"
+          >
+            <p>{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Still have questions footer box -->
+    <div class="mt-12 p-6 rounded-2xl bg-white border border-emberly-light-gray text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-left">
+        <h4 class="text-sm font-bold text-emberly-charcoal">Have a question specific to your practice EHR or specialty?</h4>
+        <p class="text-xs text-emberly-mid-gray mt-0.5">Speak with Daniela Reyes, our Director of Client Success.</p>
+      </div>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emberly-orange text-white text-xs font-bold hover:bg-emberly-orange-hover shadow-sm transition-colors flex-shrink-0"
+      >
+        <span>Schedule a quick call</span>
+        <Icon name="arrow-right" class="w-3.5 h-3.5" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Vanilla interactive FAQ accordion
+  const triggers = document.querySelectorAll<HTMLButtonElement>('.faq-trigger');
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      const content = trigger.nextElementSibling as HTMLElement;
+      const icon = trigger.querySelector('.faq-icon');
+
+      // Toggle this item
+      if (isExpanded) {
+        trigger.setAttribute('aria-expanded', 'false');
+        content.classList.add('hidden');
+        icon?.classList.remove('rotate-180', 'bg-emberly-orange-tint', 'text-emberly-orange');
+      } else {
+        trigger.setAttribute('aria-expanded', 'true');
+        content.classList.remove('hidden');
+        icon?.classList.add('rotate-180', 'bg-emberly-orange-tint', 'text-emberly-orange');
+      }
+    });
+  });
+</script>

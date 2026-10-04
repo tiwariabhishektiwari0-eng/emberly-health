@@ -1,0 +1,164 @@
+---
+// src/components/home/ServicesBento.astro
+// Bento-grid layout showcasing Emberly Health's 8 core RCM services
+import Icon from '../common/Icon.astro';
+
+const bentoServices = [
+  {
+    title: 'End-to-End Revenue Cycle Management',
+    slug: 'end-to-end-rcm',
+    tag: 'Flagship Partnership',
+    featured: true,
+    desc: 'Complete clinical and administrative stewardship from scheduling to final balance resolution. We function as a seamless extension of your practice with dedicated account leadership.',
+    highlights: ['Daily claims scrubbing & submission', 'Aged receivables recovery', 'Comprehensive month-end financial reporting'],
+    icon: 'activity',
+    colSpan: 'lg:col-span-8'
+  },
+  {
+    title: 'Certified Medical Coding',
+    slug: 'medical-coding',
+    tag: 'AAPC / AHIMA',
+    featured: true,
+    desc: 'Dual-layer certified coding audits ensuring complete ICD-10, CPT, and HCPCS accuracy. Eliminate documentation lag and prevent payer downcoding.',
+    highlights: ['Chart audit defense', 'Modifier optimization', '98%+ coding accuracy benchmark*'],
+    icon: 'file-check',
+    colSpan: 'lg:col-span-4'
+  },
+  {
+    title: 'Medical Billing & Scrubbing',
+    slug: 'medical-billing',
+    tag: 'Clean Claim Engine',
+    desc: 'Electronic claim transmission through advanced clearinghouse rules, secondary/tertiary billing, and billing reconciliation.',
+    highlights: ['Same-day electronic batching', 'Customized payer fee schedules'],
+    icon: 'dollar-sign',
+    colSpan: 'lg:col-span-4'
+  },
+  {
+    title: 'Denial Management & Appeals',
+    slug: 'denial-management-and-appeals',
+    tag: 'Revenue Recovery',
+    desc: 'Root-cause CARC/RARC analysis, rapid overturn appeals, and payer behavior profiling to eliminate recurring denials.',
+    highlights: ['48-hour appeal drafting', 'Payer trend feedback loops'],
+    icon: 'refresh-cw',
+    colSpan: 'lg:col-span-4'
+  },
+  {
+    title: 'A/R Follow-up & Recovery',
+    slug: 'ar-follow-up',
+    tag: 'Cash Acceleration',
+    desc: 'Aggressive investigation of aged 30, 60, 90, and 120+ day balances to resolve unpaid claims before timely filing expiration.',
+    highlights: ['Phone escalation protocols', 'Zero forgotten claims'],
+    icon: 'trending-up',
+    colSpan: 'lg:col-span-4'
+  },
+  {
+    title: 'Eligibility & Prior Authorization',
+    slug: 'eligibility-verification-prior-auth',
+    tag: 'Front-End Gate',
+    desc: '48-hour pre-encounter insurance verification, co-pay determination, and electronic prior authorization clearing.',
+    highlights: ['Copay/deductible breakdown', 'Peer-to-peer prep'],
+    icon: 'clipboard-check',
+    colSpan: 'lg:col-span-4'
+  },
+  {
+    title: 'Provider Credentialing & Enrollment',
+    slug: 'provider-credentialing',
+    tag: 'Payer Contracting',
+    desc: 'CAQH management, Medicare/Medicaid re-enrollment, commercial payer credentialing, and ongoing expiration alerts.',
+    highlights: ['Hospital privileging support', 'ERA/EFT bank setup'],
+    icon: 'user-check',
+    colSpan: 'lg:col-span-4'
+  },
+  {
+    title: 'Patient Billing & Payment Posting',
+    slug: 'patient-billing-payment-posting',
+    tag: 'Patient Experience',
+    desc: 'Daily ERA/EOB automated posting, contractual allowance audits, easy-to-read patient statements, and respectful inquiry phone support.',
+    highlights: ['Daily cash reconciliation', 'Online payment portal sync'],
+    icon: 'shield-check',
+    colSpan: 'lg:col-span-4'
+  }
+];
+---
+
+<section class="py-16 sm:py-24 bg-white border-t border-emberly-light-gray" id="services-section">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div class="max-w-2xl">
+        <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Specialized Capabilities</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight">
+          Precision Services Designed for US Medical Practices
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-emberly-mid-gray">
+          Whether you need end-to-end revenue cycle stewardship or targeted support to resolve a coding backlog, our specialized services integrate directly with your existing EHR and clearinghouse.
+        </p>
+      </div>
+      <div class="mt-6 md:mt-0 flex-shrink-0">
+        <a
+          href="/services"
+          class="inline-flex items-center gap-1.5 text-sm font-bold text-emberly-orange hover:text-emberly-orange-hover"
+        >
+          <span>Compare all 8 services</span>
+          <Icon name="arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Bento Grid Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {bentoServices.map((service) => (
+        <div class={`${service.colSpan} group flex flex-col justify-between p-6 sm:p-8 rounded-2xl border border-emberly-light-gray ${
+          service.featured ? 'bg-emberly-warm-white/60' : 'bg-white'
+        } hover:border-emberly-orange/50 hover:shadow-lift subtle-lift transition-all`}>
+          <div>
+            <!-- Top Tag & Icon -->
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange">
+                {service.tag}
+              </span>
+              <div class="w-10 h-10 rounded-xl bg-white border border-emberly-light-gray flex items-center justify-center text-emberly-charcoal group-hover:text-emberly-orange group-hover:border-emberly-orange/40 transition-colors">
+                <Icon name={service.icon} class="w-5 h-5" />
+              </div>
+            </div>
+
+            <!-- Title -->
+            <h3 class={`font-extrabold text-emberly-charcoal group-hover:text-emberly-orange transition-colors font-heading mb-3 ${
+              service.featured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
+            }`}>
+              <a href={`/services/${service.slug}`} class="focus:outline-none">
+                {service.title}
+              </a>
+            </h3>
+
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed mb-6">
+              {service.desc}
+            </p>
+
+            <!-- Highlights Checklist -->
+            <ul class="space-y-2 mb-6">
+              {service.highlights.map((highlight) => (
+                <li class="flex items-center gap-2 text-xs font-medium text-emberly-charcoal">
+                  <Icon name="check" class="w-3.5 h-3.5 text-emberly-orange flex-shrink-0" />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Bottom Action Link -->
+          <div class="pt-4 border-t border-emberly-light-gray/70 flex items-center justify-between">
+            <a
+              href={`/services/${service.slug}`}
+              class="text-xs font-bold text-emberly-charcoal group-hover:text-emberly-orange inline-flex items-center gap-1.5 transition-colors"
+            >
+              <span>Explore service details</span>
+              <Icon name="chevron-right" class="w-3.5 h-3.5 text-emberly-mid-gray group-hover:text-emberly-orange group-hover:translate-x-0.5 transition-all" />
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,252 @@
+---
+// src/pages/services/[slug].astro
+// Dynamic service detail page generated from content collections
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/common/Icon.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const serviceEntries = await getCollection('services');
+  return serviceEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, shortTitle, tagline, description, icon, includedFeatures, processSteps, kpis, faqs } = entry.data;
+---
+
+<BaseLayout
+  title={`${title} | Emberly Health RCM Services`}
+  description={description}
+>
+  <!-- Service Hero Section -->
+  <section class="py-14 sm:py-20 bg-white border-b border-emberly-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs text-emberly-mid-gray mb-6" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-emberly-orange">Home</a>
+        <span>/</span>
+        <a href="/services" class="hover:text-emberly-orange">Services</a>
+        <span>/</span>
+        <span class="text-emberly-charcoal font-medium truncate max-w-xs">{shortTitle}</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emberly-orange-tint text-emberly-orange font-bold text-xs uppercase tracking-wider mb-4">
+            <Icon name={icon} class="w-3.5 h-3.5" />
+            <span>Specialized Capability</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emberly-charcoal font-heading tracking-tight leading-tight mb-4">
+            {title}
+          </h1>
+
+          <p class="text-base sm:text-lg text-emberly-orange font-semibold mb-4">
+            {tagline}
+          </p>
+
+          <p class="text-sm sm:text-base text-emberly-mid-gray max-w-2xl leading-relaxed mb-8">
+            {description}
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-emberly-orange text-white font-bold text-sm hover:bg-emberly-orange-hover shadow-card subtle-lift transition-all"
+            >
+              <span>Book a free assessment</span>
+              <Icon name="arrow-right" class="w-4 h-4" />
+            </a>
+            <a
+              href="#service-process"
+              class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white border border-emberly-light-gray text-emberly-charcoal font-semibold text-sm hover:bg-emberly-warm-white transition-all"
+            >
+              <span>View operational workflow</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 bg-emberly-warm-white border border-emberly-light-gray rounded-3xl p-6 sm:p-8">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-emberly-charcoal mb-4">Service Quick Facts</h3>
+          <div class="space-y-4 text-xs">
+            <div class="pb-3 border-b border-emberly-light-gray/70">
+              <span class="text-emberly-mid-gray block">Implementation Speed:</span>
+              <strong class="text-emberly-charcoal font-bold">2 to 3 Weeks typical bridge</strong>
+            </div>
+            <div class="pb-3 border-b border-emberly-light-gray/70">
+              <span class="text-emberly-mid-gray block">Software Compatibility:</span>
+              <strong class="text-emberly-charcoal font-bold">Athena, eCW, Epic, NextGen & all major PMs</strong>
+            </div>
+            <div class="pb-3 border-b border-emberly-light-gray/70">
+              <span class="text-emberly-mid-gray block">Compliance Standard:</span>
+              <strong class="text-emberly-charcoal font-bold">HIPAA-aware administrative protocols</strong>
+            </div>
+            <div>
+              <span class="text-emberly-mid-gray block">Client Support Pod:</span>
+              <strong class="text-emberly-charcoal font-bold">US Central Time dedicated specialists</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. What Is Included Section -->
+  <section class="py-16 sm:py-20 bg-emberly-warm-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Comprehensive Scope</span>
+        <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading">
+          What Is Included in {shortTitle}
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-emberly-mid-gray">
+          Detailed breakdown of deliverables, controls, and quality standards provided in this service module.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {includedFeatures.map((feat) => (
+          <div class="p-6 sm:p-8 bg-white border border-emberly-light-gray rounded-2xl shadow-subtle flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-emberly-orange-tint text-emberly-orange flex items-center justify-center mb-4">
+                <Icon name="check-circle" class="w-4 h-4" />
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-emberly-charcoal mb-2 font-heading">
+                {feat.title}
+              </h3>
+              <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed">
+                {feat.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Step-by-Step Process Timeline -->
+  <section class="py-16 sm:py-20 bg-white border-t border-emberly-light-gray" id="service-process">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Workflow Architecture</span>
+        <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading">
+          How Our Operational Process Works
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-emberly-mid-gray">
+          A disciplined, step-by-step framework to ensure zero clinical disruption and absolute financial accuracy.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {processSteps.map((step) => (
+          <div class="p-6 bg-emberly-warm-white/70 border border-emberly-light-gray rounded-2xl flex flex-col justify-between">
+            <div>
+              <span class="text-2xl font-extrabold text-emberly-orange font-heading block mb-2">
+                0{step.step}
+              </span>
+              <h3 class="text-base font-bold text-emberly-charcoal mb-2 font-heading">
+                {step.title}
+              </h3>
+              <p class="text-xs text-emberly-mid-gray leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. KPIs We Report On -->
+  <section class="py-16 sm:py-20 bg-emberly-warm-white border-t border-emberly-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase font-bold tracking-wider text-emberly-orange">Data-Driven Accountability</span>
+        <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold text-emberly-charcoal font-heading">
+          Key Performance Indicators (KPIs) We Report On
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-emberly-mid-gray">
+          You receive line-item transparency through weekly and monthly executive performance dashboards.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {kpis.map((kpi) => (
+          <div class="p-6 sm:p-8 bg-white border border-emberly-light-gray rounded-2xl shadow-subtle text-center">
+            <span class="text-3xl sm:text-4xl font-extrabold text-emberly-orange font-heading block mb-2">
+              {kpi.benchmark}
+            </span>
+            <h3 class="text-sm font-bold text-emberly-charcoal mb-1">
+              {kpi.label}
+            </h3>
+            <p class="text-xs text-emberly-mid-gray leading-relaxed">
+              {kpi.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-4 text-center">
+        <p class="text-[11px] text-emberly-mid-gray italic">
+          *Target operational benchmarks based on representative specialty practice averages. Realized metrics are reviewed against historical baseline data during practice onboarding.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Markdown Deep Dive Body -->
+  <section class="py-16 bg-white border-t border-emberly-light-gray">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="prose prose-slate max-w-none prose-headings:font-heading prose-headings:text-emberly-charcoal prose-p:text-emberly-charcoal/90 prose-p:leading-relaxed prose-strong:text-emberly-charcoal prose-a:text-emberly-orange">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Mini-FAQ for this specific service -->
+  <section class="py-16 bg-emberly-warm-white border-t border-emberly-light-gray">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h2 class="text-2xl font-bold text-emberly-charcoal font-heading">
+          {shortTitle} Questions & Answers
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((f) => (
+          <div class="p-6 rounded-2xl bg-white border border-emberly-light-gray">
+            <h3 class="text-sm sm:text-base font-bold text-emberly-charcoal mb-2 font-heading">
+              {f.question}
+            </h3>
+            <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed">
+              {f.answer}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="py-16 sm:py-20 bg-emberly-dark-charcoal text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl font-extrabold font-heading mb-3">
+        Ready to optimize your {shortTitle.toLowerCase()} operations?
+      </h2>
+      <p class="text-xs sm:text-sm text-emberly-light-gray/80 max-w-xl mx-auto mb-8 leading-relaxed">
+        Schedule a zero-risk 15-minute consultation with Daniela Reyes. We will review your current claim bottlenecks and provide tailored solutions for your practice.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emberly-orange text-white font-bold text-sm hover:bg-emberly-orange-hover shadow-card subtle-lift transition-all"
+      >
+        <span>Schedule free consultation</span>
+        <Icon name="arrow-right" class="w-4 h-4" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

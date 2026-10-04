@@ -1,0 +1,53 @@
+---
+// src/pages/404.astro
+// Custom branded 404 error page
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/common/Icon.astro';
+---
+
+<BaseLayout
+  title="Page Not Found (404) | Emberly Health"
+  description="The requested page could not be found. Explore Emberly Health medical billing, coding, and RCM services."
+>
+  <section class="py-20 sm:py-32 flex items-center justify-center">
+    <div class="max-w-xl mx-auto px-4 sm:px-6 text-center">
+      <div class="w-16 h-16 rounded-3xl bg-emberly-orange-tint text-emberly-orange flex items-center justify-center mx-auto mb-6">
+        <Icon name="alert-circle" class="w-8 h-8" />
+      </div>
+
+      <span class="text-xs font-bold uppercase tracking-wider text-emberly-orange px-3 py-1 rounded-full bg-emberly-orange-tint mb-4 inline-block">
+        Error 404 &middot; Page Not Found
+      </span>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight mb-4">
+        We Couldn’t Find That Page
+      </h1>
+
+      <p class="text-xs sm:text-sm text-emberly-mid-gray leading-relaxed mb-8">
+        The link you followed may be outdated, moved, or misspelled. Use the navigation links below to return to our primary services or schedule a practice assessment.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emberly-orange text-white font-bold text-xs hover:bg-emberly-orange-hover shadow-sm transition-all"
+        >
+          <Icon name="arrow-left" class="w-4 h-4" />
+          <span>Return to Homepage</span>
+        </a>
+        <a
+          href="/services"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-emberly-light-gray text-emberly-charcoal font-semibold text-xs hover:bg-emberly-warm-white transition-all"
+        >
+          <span>Explore All Services</span>
+        </a>
+        <a
+          href="/contact"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-emberly-light-gray text-emberly-charcoal font-semibold text-xs hover:bg-emberly-warm-white transition-all"
+        >
+          <span>Contact Us</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+// src/components/common/MobileStickyBar.astro
+// Pinned bottom conversion bar for mobile viewports
+import Icon from './Icon.astro';
+---
+
+<div class="fixed bottom-0 inset-x-0 z-40 p-3 bg-white/95 backdrop-blur-md border-t border-emberly-light-gray shadow-lift md:hidden flex items-center gap-2">
+  <a
+    href="tel:2145550147"
+    class="p-2.5 rounded-xl border border-emberly-light-gray text-emberly-charcoal hover:bg-emberly-warm-white flex items-center justify-center flex-shrink-0"
+    aria-label="Call Emberly Health"
+  >
+    <Icon name="phone" class="w-5 h-5 text-emberly-orange" />
+  </a>
+  <a
+    href="/contact"
+    class="flex-1 py-2.5 px-4 bg-emberly-orange text-white text-xs font-bold rounded-xl text-center shadow-sm hover:bg-emberly-orange-hover flex items-center justify-center gap-2 transition-colors"
+  >
+    <span>Book a free assessment</span>
+    <Icon name="arrow-right" class="w-4 h-4" />
+  </a>
+</div>

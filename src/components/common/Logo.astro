@@ -1,0 +1,53 @@
+---
+// src/components/common/Logo.astro
+// Authentic Emberly Health brand mark + wordmark
+interface Props {
+  variant?: 'light' | 'dark';
+  size?: 'sm' | 'md' | 'lg';
+  showTagline?: boolean;
+}
+
+const { variant = 'light', size = 'md', showTagline = false } = Astro.props;
+
+const isDark = variant === 'dark';
+const wordmarkEmberlyColor = isDark ? 'text-white' : 'text-emberly-charcoal';
+const wordmarkHealthColor = 'text-emberly-orange';
+const crossColor = isDark ? '#E5E7EB' : '#3F4650';
+
+const markSizes = {
+  sm: 'w-7 h-7',
+  md: 'w-9 h-9',
+  lg: 'w-11 h-11'
+};
+
+const textSizes = {
+  sm: 'text-lg',
+  md: 'text-xl',
+  lg: 'text-2xl'
+};
+---
+
+<a href="/" class="group inline-flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-emberly-orange focus-visible:ring-offset-2 rounded-lg" aria-label="Emberly Health — Back to home">
+  <!-- Brand Mark -->
+  <div class={`relative flex-shrink-0 ${markSizes[size]} transition-transform duration-200 group-hover:scale-105`}>
+    <svg viewBox="90 80 140 140" class="w-full h-full" aria-hidden="true">
+      <path d="M103.2 177 A54 54 0 1 1 200.7 168.5" fill="none" stroke="#F26B1D" stroke-width="10" stroke-linecap="round"/>
+      <polygon points="211,172.3 190.4,164.7 196.6,179.8" fill="#F26B1D" stroke="#F26B1D" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="139" y="118" width="22" height="64" rx="6" fill={crossColor}/>
+      <rect x="118" y="139" width="64" height="22" rx="6" fill={crossColor}/>
+    </svg>
+  </div>
+
+  <!-- Wordmark -->
+  <div class="flex flex-col leading-tight">
+    <div class={`font-heading tracking-tight font-extrabold flex items-baseline gap-1 ${textSizes[size]}`}>
+      <span class={wordmarkEmberlyColor}>Emberly</span>
+      <span class={`font-medium ${wordmarkHealthColor}`}>Health</span>
+    </div>
+    {showTagline && (
+      <span class={`text-[10px] tracking-wider uppercase font-medium ${isDark ? 'text-emberly-light-gray/70' : 'text-emberly-mid-gray'}`}>
+        Medical billing &middot; coding &middot; RCM
+      </span>
+    )}
+  </div>
+</a>

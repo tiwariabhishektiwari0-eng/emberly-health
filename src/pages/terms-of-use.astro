@@ -1,0 +1,85 @@
+---
+// src/pages/terms-of-use.astro
+// Terms of Use template flagged for corporate legal review
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/common/Icon.astro';
+---
+
+<BaseLayout
+  title="Terms of Use | Emberly Health"
+  description="Terms and conditions governing the use of the Emberly Health website and informational services."
+>
+  <div class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
+    <!-- Legal Notice Banner -->
+    <div class="mb-8 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-3">
+      <Icon name="alert-circle" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+      <div>
+        <strong>Legal Template Notice:</strong> This document represents a standard website Terms of Use agreement flagged for review and customization by your healthcare legal counsel prior to formal publication.
+      </div>
+    </div>
+
+    <header class="mb-10 pb-6 border-b border-emberly-light-gray">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight mb-2">
+        Website Terms of Use
+      </h1>
+      <p class="text-xs text-emberly-mid-gray">Last Updated: March 2026 &middot; Emberly Health LLC</p>
+    </header>
+
+    <div class="prose prose-slate max-w-none text-xs sm:text-sm text-emberly-charcoal/90 leading-relaxed space-y-6">
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">1. Acceptance of Terms</h2>
+        <p>
+          By accessing or using the website located at emberlyhealth.com (the "Site"), you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, you must not access or use the Site.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">2. Informational Purpose Only — No Medical or Legal Advice</h2>
+        <p>
+          All content, articles, coding checklists, and benchmarks published on this Site are provided for general educational and informational purposes only. The information does not constitute medical, clinical, legal, or formal financial advice. Medical practices must consult with their own licensed legal counsel, certified healthcare compliance officers, and clinical leadership regarding specific payer contracts, billing practices, and regulatory mandates.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">3. Sample Benchmarks & Metrics Disclaimer</h2>
+        <p>
+          Any performance statistics, clean claim rates, days in A/R, or denial reductions cited on this Site represent illustrative historical modeling and sample benchmarks. Actual revenue cycle performance depends on multiple external variables including practice specialty, EHR documentation completeness, provider credentialing status, and commercial payer contract terms. No specific financial outcome is guaranteed.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">4. Prohibition on Submitting Protected Health Information (PHI)</h2>
+        <p>
+          Users are strictly prohibited from transmitting any Protected Health Information (PHI), individually identifiable health information, patient medical records, or sensitive clinical documents through the public contact and assessment forms on this Site. All formal exchanges of patient data occur exclusively through secure, encrypted channels governed by executed Business Associate Agreements (BAAs).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">5. Intellectual Property Rights</h2>
+        <p>
+          The Site, its original content, brand marks, logos, vector diagrams, and software code are the exclusive property of Emberly Health LLC and are protected by United States and international copyright, trademark, and intellectual property laws.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">6. Governing Law</h2>
+        <p>
+          These Terms of Use shall be governed by and construed in accordance with the laws of the State of Texas and applicable United States federal law, without regard to its conflict of law principles.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">7. Inquiries</h2>
+        <p>
+          For questions regarding these Terms of Use, please contact:
+        </p>
+        <div class="p-4 rounded-xl bg-emberly-warm-white border border-emberly-light-gray mt-2 text-xs">
+          <strong>Emberly Health LLC — Legal Operations</strong><br />
+          2400 Meridian Park Drive, Suite 310<br />
+          Plano, TX 75024<br />
+          Email: <a href="mailto:legal@emberlyhealth.com" class="text-emberly-orange underline">legal@emberlyhealth.com</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

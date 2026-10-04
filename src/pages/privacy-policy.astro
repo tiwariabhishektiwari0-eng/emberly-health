@@ -1,0 +1,100 @@
+---
+// src/pages/privacy-policy.astro
+// Privacy Policy template flagged for corporate legal review
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/common/Icon.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy | Emberly Health"
+  description="Privacy policy governing website use, communications, and data protection practices for Emberly Health."
+>
+  <div class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
+    <!-- Legal Notice Banner -->
+    <div class="mb-8 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-3">
+      <Icon name="alert-circle" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+      <div>
+        <strong>Legal Template Notice:</strong> This privacy policy contains representative disclosure text designed for corporate legal and compliance review prior to commercial launch. It outlines standard administrative website privacy practices.
+      </div>
+    </div>
+
+    <header class="mb-10 pb-6 border-b border-emberly-light-gray">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight mb-2">
+        Website Privacy Policy
+      </h1>
+      <p class="text-xs text-emberly-mid-gray">Last Updated: March 2026 &middot; Emberly Health LLC</p>
+    </header>
+
+    <div class="prose prose-slate max-w-none text-xs sm:text-sm text-emberly-charcoal/90 leading-relaxed space-y-6">
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">1. Introduction</h2>
+        <p>
+          Emberly Health LLC ("Emberly Health", "we", "us", or "our") respects the privacy of users who visit our marketing website. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit emberlyhealth.com.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">2. Information We Collect</h2>
+        <p>
+          We collect information that you voluntarily provide to us when you fill out an online form to request a practice revenue assessment, contact our client success team, or apply for an open career position. This information may include:
+        </p>
+        <ul class="list-disc pl-5 space-y-1 text-emberly-mid-gray">
+          <li>Full name and professional job title</li>
+          <li>Practice or clinic name and clinical specialty</li>
+          <li>Work email address and telephone number</li>
+          <li>Estimated monthly claim volume and practice notes</li>
+          <li>Resume and employment history submitted for career applications</li>
+        </ul>
+        <p class="mt-2 font-semibold text-emberly-charcoal">
+          Important: Our public web forms are NOT intended for the transmission of Protected Health Information (PHI). Please do not submit patient names, medical records, or sensitive clinical data through website forms.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">3. How We Use Your Information</h2>
+        <p>We use the information collected via our website solely to:</p>
+        <ul class="list-disc pl-5 space-y-1 text-emberly-mid-gray">
+          <li>Respond directly to your practice assessment inquiries and service requests</li>
+          <li>Deliver relevant healthcare RCM benchmarking analyses and proposals</li>
+          <li>Process employment applications and communicate regarding career opportunities</li>
+          <li>Maintain website security, prevent fraud, and verify human form submissions via Cloudflare Turnstile</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">4. Cookies and Web Analytics</h2>
+        <p>
+          Our website operates with a privacy-first approach. We do not use third-party behavioral advertising cookies or cross-site tracking pixels. Any web performance analytics deployed are cookieless and privacy-preserving, measuring aggregated visitor metrics without tracking individual identities.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">5. Information Sharing and Disclosure</h2>
+        <p>
+          We do not sell, rent, or trade your contact information to third parties. We share information only with trusted service providers who assist us in operating our website and communications (e.g., transactional email transmission via Resend and bot verification via Cloudflare), subject to strict confidentiality agreements.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">6. Data Security</h2>
+        <p>
+          We implement technical and organizational security measures to protect website submission data against unauthorized access, loss, or alteration. All web communications are encrypted in transit using industry-standard TLS protocols.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-emberly-charcoal font-heading">7. Contact Information</h2>
+        <p>
+          If you have questions regarding this Privacy Policy or our data protection practices, please contact us at:
+        </p>
+        <div class="p-4 rounded-xl bg-emberly-warm-white border border-emberly-light-gray mt-2 text-xs">
+          <strong>Emberly Health LLC — Privacy Officer</strong><br />
+          2400 Meridian Park Drive, Suite 310<br />
+          Plano, TX 75024<br />
+          Email: <a href="mailto:privacy@emberlyhealth.com" class="text-emberly-orange underline">privacy@emberlyhealth.com</a><br />
+          Phone: (214) 555-0147
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

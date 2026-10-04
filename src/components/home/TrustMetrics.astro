@@ -1,0 +1,54 @@
+---
+// src/components/home/TrustMetrics.astro
+// Trust strip with 4 sample metric cards explicitly marked as representative sample figures
+const metrics = [
+  {
+    value: '98.4%',
+    label: 'Clean Claim Rate*',
+    context: 'First-pass adjudication target across electronic clearinghouses',
+  },
+  {
+    value: '18 Days',
+    label: 'Average Days in A/R*',
+    context: 'Compared to the MGMA industry benchmark of 35–45 days',
+  },
+  {
+    value: '24%',
+    label: 'Denial Reduction*',
+    context: 'Average reduction in initial payer denials after 90 days',
+  },
+  {
+    value: '3 Weeks',
+    label: 'Practice Onboarding*',
+    context: 'Rapid credentialing audit, EHR bridge, and workflow kickoff',
+  },
+];
+---
+
+<!-- Sample operational metrics - Replace with verified client statistics prior to commercial launch -->
+<section class="py-10 bg-white border-y border-emberly-light-gray" aria-label="Key Performance Indicators">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {metrics.map((item) => (
+        <div class="flex flex-col p-4 rounded-2xl bg-emberly-warm-white/70 border border-emberly-light-gray/70">
+          <span class="text-3xl sm:text-4xl font-extrabold text-emberly-charcoal font-heading tracking-tight">
+            {item.value}
+          </span>
+          <span class="mt-1 text-sm font-bold text-emberly-orange">
+            {item.label}
+          </span>
+          <p class="mt-1.5 text-xs text-emberly-mid-gray leading-relaxed">
+            {item.context}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Clear Sample Disclaimer Note -->
+    <div class="mt-4 text-center">
+      <p class="text-[11px] text-emberly-mid-gray italic">
+        *Sample performance metrics based on standard practice operational modeling. Realized metrics vary by clinical specialty, documentation quality, and payer contracts.
+      </p>
+    </div>
+  </div>
+</section>
