@@ -12,7 +12,7 @@ All contact information throughout the site is fictional/placeholder. Replace be
 
 | Location | Placeholder | Required Action |
 |---|---|---|
-| `src/components/common/Footer.astro` | Address: 2400 Meridian Park Drive, Suite 310, Plano, TX 75024 | Replace with real business address |
+| `src/components/common/Footer.astro` | Address: 2400 Meridian Park Drive, Suite 310, Plano, TX 7999 | Replace with real business address |
 | `src/components/common/Footer.astro` | Phone: (214) 555-0147 | Replace with real business phone number |
 | `src/components/common/Footer.astro` | Email: hello@emberlyhealth.com | Confirm this inbox exists and is monitored |
 | `src/components/forms/LocationCard.astro` | All contact details (address, phone, email, hours) | Replace all placeholder values |
